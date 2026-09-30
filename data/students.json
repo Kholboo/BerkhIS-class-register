@@ -1,0 +1,291 @@
+{
+  "updated": "2026-09-30T20:16:24.160Z",
+  "students": [
+    {
+      "id": "1",
+      "lastName": "Батбаяр",
+      "firstName": "Анар",
+      "gender": "Эрэгтэй",
+      "birthdate": "2009-03-15",
+      "phone": "99111234",
+      "email": "anar.b@moes.edu.mn",
+      "email2": "anar.b@berkh.edu.mn",
+      "photo": "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=400&auto=format&fit=crop&q=80"
+    },
+    {
+      "id": "2",
+      "lastName": "Нямсүрэн",
+      "firstName": "Амин-Эрдэнэ",
+      "gender": "Эмэгтэй",
+      "birthdate": "2009-07-22",
+      "phone": "99222345",
+      "email": "aminerdene.n@moes.edu.mn",
+      "email2": "aminerdene.n@berkh.edu.mn",
+      "photo": "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400&auto=format&fit=crop&q=80"
+    },
+    {
+      "id": "3",
+      "lastName": "Ганзориг",
+      "firstName": "Болд",
+      "gender": "Эрэгтэй",
+      "birthdate": "2009-01-10",
+      "phone": "99333456",
+      "email": "bold.g@moes.edu.mn",
+      "email2": "bold.g@berkh.edu.mn",
+      "photo": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&auto=format&fit=crop&q=80"
+    },
+    {
+      "id": "4",
+      "lastName": "Дорж",
+      "firstName": "Номин",
+      "gender": "Эмэгтэй",
+      "birthdate": "2009-11-05",
+      "phone": "99444567",
+      "email": "nomin.d@moes.edu.mn",
+      "email2": "nomin.d@berkh.edu.mn",
+      "photo": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&auto=format&fit=crop&q=80"
+    },
+    {
+      "id": "5",
+      "lastName": "Эрдэнэбат",
+      "firstName": "Тэмүүлэн",
+      "gender": "Эрэгтэй",
+      "birthdate": "2009-05-18",
+      "phone": "99555678",
+      "email": "temuulen.e@moes.edu.mn",
+      "email2": "temuulen.e@berkh.edu.mn",
+      "photo": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&auto=format&fit=crop&q=80"
+    },
+    {
+      "id": "6",
+      "lastName": "Сувд-Эрдэнэ",
+      "firstName": "Хулан",
+      "gender": "Эмэгтэй",
+      "birthdate": "2009-08-30",
+      "phone": "99666789",
+      "email": "khulan.s@moes.edu.mn",
+      "email2": "khulan.s@berkh.edu.mn",
+      "photo": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80"
+    },
+    {
+      "id": "7",
+      "lastName": "Баатар",
+      "firstName": "Билгүүн",
+      "gender": "Эрэгтэй",
+      "birthdate": "2009-04-12",
+      "phone": "99777890",
+      "email": "bilguun.b@moes.edu.mn",
+      "email2": "bilguun.b@berkh.edu.mn",
+      "photo": "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=400&auto=format&fit=crop&q=80"
+    },
+    {
+      "id": "8",
+      "lastName": "Мөнх-Эрдэнэ",
+      "firstName": "Энхжин",
+      "gender": "Эмэгтэй",
+      "birthdate": "2009-12-14",
+      "phone": "99888901",
+      "email": "enkhjin.m@moes.edu.mn",
+      "email2": "enkhjin.m@berkh.edu.mn",
+      "photo": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=400&auto=format&fit=crop&q=80"
+    },
+    {
+      "id": "9",
+      "lastName": "Лхагвасүрэн",
+      "firstName": "Мөнх-Оргил",
+      "gender": "Эрэгтэй",
+      "birthdate": "2009-02-28",
+      "phone": "99000112",
+      "email": "munkhorgil.l@moes.edu.mn",
+      "email2": "munkhorgil.l@berkh.edu.mn",
+      "photo": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&auto=format&fit=crop&q=80"
+    },
+    {
+      "id": "10",
+      "lastName": "Пүрэвдорж",
+      "firstName": "Мишээл",
+      "gender": "Эмэгтэй",
+      "birthdate": "2009-09-09",
+      "phone": "99112233",
+      "email": "misheel.p@moes.edu.mn",
+      "email2": "misheel.p@berkh.edu.mn",
+      "photo": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&auto=format&fit=crop&q=80"
+    },
+    {
+      "id": "11",
+      "lastName": "Даваажав",
+      "firstName": "Ирмүүн",
+      "gender": "Эрэгтэй",
+      "birthdate": "2009-06-25",
+      "phone": "99223344",
+      "email": "irmuun.d@moes.edu.mn",
+      "email2": "irmuun.d@berkh.edu.mn",
+      "photo": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&auto=format&fit=crop&q=80"
+    },
+    {
+      "id": "12",
+      "lastName": "Жаргалсайхан",
+      "firstName": "Сарнай",
+      "gender": "Эмэгтэй",
+      "birthdate": "2009-10-17",
+      "phone": "99334455",
+      "email": "sarnai.j@moes.edu.mn",
+      "email2": "sarnai.j@berkh.edu.mn",
+      "photo": "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=400&auto=format&fit=crop&q=80"
+    },
+    {
+      "id": "13",
+      "lastName": "Чинбат",
+      "firstName": "Алдар",
+      "gender": "Эрэгтэй",
+      "birthdate": "2009-01-20",
+      "phone": "99445566",
+      "email": "aldar.ch@moes.edu.mn",
+      "email2": "aldar.ch@berkh.edu.mn",
+      "photo": "https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&auto=format&fit=crop&q=80"
+    },
+    {
+      "id": "14",
+      "lastName": "Бат-Эрдэнэ",
+      "firstName": "Анужин",
+      "gender": "Эмэгтэй",
+      "birthdate": "2009-05-04",
+      "phone": "99556677",
+      "email": "anujin.b@moes.edu.mn",
+      "email2": "anujin.b@berkh.edu.mn",
+      "photo": "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=400&auto=format&fit=crop&q=80"
+    },
+    {
+      "id": "15",
+      "lastName": "Отгонбаатар",
+      "firstName": "Төгөлдөр",
+      "gender": "Эрэгтэй",
+      "birthdate": "2009-07-11",
+      "phone": "99667788",
+      "email": "tuguldur.o@moes.edu.mn",
+      "email2": "tuguldur.o@berkh.edu.mn",
+      "photo": "https://images.unsplash.com/photo-1463453091185-61582044d556?w=400&auto=format&fit=crop&q=80"
+    },
+    {
+      "id": "16",
+      "lastName": "Хүрэлбаатар",
+      "firstName": "Уянга",
+      "gender": "Эмэгтэй",
+      "birthdate": "2009-03-29",
+      "phone": "99778899",
+      "email": "uyanga.kh@moes.edu.mn",
+      "email2": "uyanga.kh@berkh.edu.mn",
+      "photo": "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400&auto=format&fit=crop&q=80"
+    },
+    {
+      "id": "17",
+      "lastName": "Төмөрбаатар",
+      "firstName": "Анар-Эрдэнэ",
+      "gender": "Эрэгтэй",
+      "birthdate": "2009-11-21",
+      "phone": "99889900",
+      "email": "anarerdene.t@moes.edu.mn",
+      "email2": "anarerdene.t@berkh.edu.mn",
+      "photo": "https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?w=400&auto=format&fit=crop&q=80"
+    },
+    {
+      "id": "18",
+      "lastName": "Цэцэгмаа",
+      "firstName": "Ариунзаяа",
+      "gender": "Эмэгтэй",
+      "birthdate": "2009-08-08",
+      "phone": "99990011",
+      "email": "ariunzaya.ts@moes.edu.mn",
+      "email2": "ariunzaya.ts@berkh.edu.mn",
+      "photo": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80"
+    },
+    {
+      "id": "19",
+      "lastName": "Сүхбаатар",
+      "firstName": "Бат-Оргил",
+      "gender": "Эрэгтэй",
+      "birthdate": "2009-04-03",
+      "phone": "99001122",
+      "email": "batorgil.s@moes.edu.mn",
+      "email2": "batorgil.s@berkh.edu.mn",
+      "photo": "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&auto=format&fit=crop&q=80"
+    },
+    {
+      "id": "20",
+      "lastName": "Дашдорж",
+      "firstName": "Төгс-Эрдэнэ",
+      "gender": "Эмэгтэй",
+      "birthdate": "2009-10-31",
+      "phone": "99113355",
+      "email": "tugserdene.d@moes.edu.mn",
+      "email2": "tugserdene.d@berkh.edu.mn",
+      "photo": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=400&auto=format&fit=crop&q=80"
+    },
+    {
+      "id": "21",
+      "lastName": "Ганболд",
+      "firstName": "Алтангэрэл",
+      "gender": "Эрэгтэй",
+      "birthdate": "2009-02-14",
+      "phone": "99224466",
+      "email": "altangerel.g@moes.edu.mn",
+      "email2": "altangerel.g@berkh.edu.mn",
+      "photo": "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&auto=format&fit=crop&q=80"
+    },
+    {
+      "id": "22",
+      "lastName": "Алтансүх",
+      "firstName": "Цэлмэг",
+      "gender": "Эмэгтэй",
+      "birthdate": "2009-06-06",
+      "phone": "99335577",
+      "email": "tselmeg.a@moes.edu.mn",
+      "email2": "tselmeg.a@berkh.edu.mn",
+      "photo": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&auto=format&fit=crop&q=80"
+    },
+    {
+      "id": "23",
+      "lastName": "Баатархүү",
+      "firstName": "Эрхэмбаяр",
+      "gender": "Эрэгтэй",
+      "birthdate": "2009-09-19",
+      "phone": "99446688",
+      "email": "erkhembayar.b@moes.edu.mn",
+      "email2": "erkhembayar.b@berkh.edu.mn",
+      "photo": "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=400&auto=format&fit=crop&q=80"
+    },
+    {
+      "id": "24",
+      "lastName": "Оюунбат",
+      "firstName": "Ундрах",
+      "gender": "Эмэгтэй",
+      "birthdate": "2009-12-01",
+      "phone": "99557799",
+      "email": "undrakh.o@moes.edu.mn",
+      "email2": "undrakh.o@berkh.edu.mn",
+      "photo": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&auto=format&fit=crop&q=80"
+    },
+    {
+      "id": "25",
+      "lastName": "Байгальмаа",
+      "firstName": "Золбоо",
+      "gender": "Эрэгтэй",
+      "birthdate": "2009-03-08",
+      "phone": "99668800",
+      "email": "zolboo.b@moes.edu.mn",
+      "email2": "zolboo.b@berkh.edu.mn",
+      "photo": "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=400&auto=format&fit=crop&q=80"
+    },
+    {
+      "id": "26",
+      "lastName": "Нэргүй",
+      "firstName": "Нандин-Эрдэнэ",
+      "gender": "Эмэгтэй",
+      "birthdate": "2009-05-15",
+      "phone": "99779911",
+      "email": "nandinerdene.n@moes.edu.mn",
+      "email2": "nandinerdene.n@berkh.edu.mn",
+      "photo": "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=400&auto=format&fit=crop&q=80"
+    }
+  ]
+}
