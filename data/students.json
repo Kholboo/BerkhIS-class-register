@@ -1,18 +1,18 @@
 {
-  "updated": "2026-09-30T23:39:11.991Z",
+  "updated": "2026-09-30T23:47:43.426Z",
   "teacherHash": "e53d82b92268dc0e7cbf0da886b81f665a6c1bcde864d7fe46caa68f618ea6e9",
   "viewCodeHash": "1ade942a8448f36f19ea477cb578d43ed34541d7599fb2218a287bb785706b1b",
   "students": [
     {
       "id": "1",
-      "lastName": "Батбаяр",
-      "firstName": "Анар",
-      "gender": "Эрэгтэй",
-      "birthdate": "2009-03-15",
-      "phone": "99111234",
-      "email": "anar.b@moes.edu.mn",
-      "email2": "anar.b@berkh.edu.mn",
-      "photo": "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=400&auto=format&fit=crop&q=80"
+      "lastName": "Буянжаргал",
+      "firstName": "Амирлан",
+      "gender": "Эмэгтэй",
+      "birthdate": "2011-10-15",
+      "phone": "86877992",
+      "email": "amirlan1mv6@moes.edu.mn",
+      "email2": "amirlan2029@berkh.edu.mn",
+      "photo": "https://drive.google.com/file/d/1MrfBhbN838KuJ4qMAYDjHGympVZtS8ol/view?usp=sharing"
     },
     {
       "id": "2",
