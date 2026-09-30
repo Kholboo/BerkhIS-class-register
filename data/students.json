@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-30T23:52:26.870Z",
+  "updated": "2026-09-30T23:58:55.381Z",
   "teacherHash": "e53d82b92268dc0e7cbf0da886b81f665a6c1bcde864d7fe46caa68f618ea6e9",
   "viewCodeHash": "1ade942a8448f36f19ea477cb578d43ed34541d7599fb2218a287bb785706b1b",
   "students": [
@@ -16,14 +16,14 @@
     },
     {
       "id": "2",
-      "lastName": "Нямсүрэн",
-      "firstName": "Амин-Эрдэнэ",
+      "lastName": "Алтансор",
+      "firstName": "Анар",
       "gender": "Эмэгтэй",
-      "birthdate": "2009-07-22",
-      "phone": "99222345",
-      "email": "aminerdene.n@moes.edu.mn",
-      "email2": "aminerdene.n@berkh.edu.mn",
-      "photo": "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400&auto=format&fit=crop&q=80"
+      "birthdate": "2011-04-13",
+      "phone": "90418989",
+      "email": "anar6w2h@moes.edu.mn",
+      "email2": "anar2029@berkh.edu.mn",
+      "photo": "https://raw.githubusercontent.com/kholboo/BerkhIS-class-register/main/data/photos/2-1790812731796.png"
     },
     {
       "id": "3",
