@@ -1,0 +1,1643 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Бэрх Олон Улсын Сургууль - 10Б Анги</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+    <!-- Google Fonts Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'berkh-red': '#a81146',
+                        'berkh-crimson': '#7e0a34',
+                        'berkh-blue': '#1a3a8b',
+                        'berkh-gold': '#f3b218',
+                        'berkh-light': '#faf6f8',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f7f4f6;
+        }
+        .modal-backdrop {
+            background-color: rgba(126, 10, 52, 0.65);
+            backdrop-filter: blur(4px);
+        }
+        .card-hover {
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px -10px rgba(168, 17, 70, 0.2);
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #d8b4c2;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a81146;
+        }
+    </style>
+</head>
+<body class="text-slate-800 antialiased min-h-screen flex flex-col justify-between">
+
+    <!-- Navigation Header -->
+    <header class="bg-berkh-blue text-white shadow-lg sticky top-0 z-30 border-b border-berkh-navy">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                
+                <!-- Logo & School Info -->
+                <div class="flex items-center space-x-4">
+                    <div id="headerLogoContainer" onclick="protectedOpenLogoModal()" class="w-16 h-16 bg-white rounded-2xl flex items-center justify-center p-2 shadow-md border-2 border-amber-400 flex-shrink-0 relative cursor-pointer group" title="Сургуулийн логог солих бол дарна уу (Багшийн эрх)">
+                        <div id="schoolLogoDisplay" class="w-full h-full flex items-center justify-center overflow-hidden">
+                            <!-- SVG or IMG loaded dynamically via JS -->
+                        </div>
+                        <div class="absolute inset-0 bg-black/40 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xs font-semibold">
+                            <i class="fa-solid fa-camera text-base"></i>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <h1 class="text-xl sm:text-2xl font-extrabold tracking-tight text-white">BERKH INTERNATIONAL SCHOOL</h1>
+                            <span class="bg-amber-400 text-berkh-navy text-xs px-2.5 py-0.5 rounded-full font-extrabold uppercase tracking-wider shadow-sm">Cambridge</span>
+                        </div>
+                        <p class="text-xs sm:text-sm text-slate-300 font-medium">Бэрх Олон Улсын Сургууль • <span class="text-amber-300 font-semibold">10Б Анги</span> (2025-2026)</p>
+                    </div>
+                </div>
+
+                <!-- Action Button & Stats Badge -->
+                <div class="flex items-center gap-3 w-full md:w-auto justify-end">
+                    <div class="hidden sm:flex items-center bg-black/20 border border-white/10 rounded-xl px-4 py-2 text-xs">
+                        <i class="fa-solid fa-graduation-cap text-berkh-gold text-base mr-2.5"></i>
+                        <div>
+                            <p class="text-pink-200">Нийт сурагчид</p>
+                            <p id="statTotalCountHeader" class="text-base font-bold text-white">0 сурагч</p>
+                        </div>
+                    </div>
+                    <button onclick="protectedOpenAddModal()" class="w-full sm:w-auto bg-berkh-gold hover:bg-amber-400 text-berkh-crimson font-bold px-5 py-2.5 rounded-xl text-sm shadow-lg transition-all duration-200 flex items-center justify-center gap-2 border border-amber-300/50">
+                        <i class="fa-solid fa-user-plus text-sm"></i>
+                        <span>Сурагч нэмэх</span>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-grow w-full">
+
+        <!-- Hero & Class Summary Card -->
+        <div class="bg-gradient-to-br from-berkh-crimson via-berkh-red to-berkh-blue rounded-3xl p-6 sm:p-8 text-white shadow-xl mb-8 relative overflow-hidden border border-berkh-red/30">
+            <div class="absolute -right-10 -bottom-10 opacity-10 pointer-events-none">
+                <i class="fa-solid fa-school text-[220px]"></i>
+            </div>
+            
+            <div class="relative z-10 grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
+                <div class="md:col-span-2">
+                    <span class="inline-block bg-berkh-gold/20 text-amber-300 border border-berkh-gold/40 text-xs font-semibold px-3 py-1 rounded-full mb-3">
+                        <i class="fa-solid fa-star mr-1 text-berkh-gold"></i> Ахлах сургууль • 10-р анги
+                    </span>
+                    <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight mb-2">10Б Ангийн Сурагчдын Бүртгэлийн Систем</h2>
+                    <p class="text-pink-100 text-sm sm:text-base leading-relaxed max-w-2xl">
+                        Бэрх Олон Улсын Сургуулийн 10Б ангийн сурагчдын мэдээллийн санд тавтай морилно уу.
+                    </p>
+                </div>
+
+                <!-- Quick Stats Box -->
+                <div class="bg-white/10 backdrop-blur-md rounded-2xl p-5 border border-white/20 grid grid-cols-3 gap-3 text-center">
+                    <div class="p-2 rounded-xl bg-black/10">
+                        <span class="block text-pink-200 text-xs font-medium">Нийт</span>
+                        <span id="statTotal" class="text-2xl font-black text-berkh-gold">0</span>
+                    </div>
+                    <div class="p-2 rounded-xl bg-black/10">
+                        <span class="block text-pink-200 text-xs font-medium">Эрэгтэй</span>
+                        <span id="statMale" class="text-2xl font-black text-sky-300">0</span>
+                    </div>
+                    <div class="p-2 rounded-xl bg-black/10">
+                        <span class="block text-pink-200 text-xs font-medium">Эмэгтэй</span>
+                        <span id="statFemale" class="text-2xl font-black text-pink-300">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controls Bar: Search, Gender Filter, View Mode -->
+        <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-4 mb-6 flex flex-col md:flex-row justify-between items-center gap-4">
+            
+            <!-- Search Bar -->
+            <div class="relative w-full md:w-96">
+                <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400"></i>
+                <input type="text" id="searchInput" oninput="filterStudents()" placeholder="Овог, нэрээр хайх..." 
+                    class="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-berkh-red/30 focus:border-berkh-red transition-all">
+            </div>
+
+            <div class="flex flex-wrap items-center justify-between md:justify-end gap-3 w-full md:w-auto">
+                <!-- Gender Filter Tabs -->
+                <div class="bg-slate-100 p-1 rounded-xl flex items-center space-x-1 text-xs font-semibold text-slate-600">
+                    <button onclick="setFilter('all')" id="filterAll" class="px-3 py-1.5 rounded-lg bg-white text-berkh-red shadow-sm transition-all">
+                        Бүгд (<span id="countAll">0</span>)
+                    </button>
+                    <button onclick="setFilter('Эрэгтэй')" id="filterMale" class="px-3 py-1.5 rounded-lg hover:text-slate-900 transition-all">
+                        Эрэгтэй (<span id="countMale">0</span>)
+                    </button>
+                    <button onclick="setFilter('Эмэгтэй')" id="filterFemale" class="px-3 py-1.5 rounded-lg hover:text-slate-900 transition-all">
+                        Эмэгтэй (<span id="countFemale">0</span>)
+                    </button>
+                </div>
+
+                <!-- View Mode Switch (Grid vs Table) -->
+                <div class="bg-slate-100 p-1 rounded-xl flex items-center space-x-1 border border-slate-200">
+                    <button onclick="setViewMode('grid')" id="viewGridBtn" title="Картаар харах" class="p-2 rounded-lg bg-white text-berkh-red shadow-sm">
+                        <i class="fa-solid fa-border-all text-sm"></i>
+                    </button>
+                    <button onclick="setViewMode('table')" id="viewTableBtn" title="Хүснэгтээр харах" class="p-2 rounded-lg text-slate-500 hover:text-slate-800">
+                        <i class="fa-solid fa-list text-sm"></i>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Student Roster Container (Grid View) -->
+        <div id="gridContainer" class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+            <!-- Student cards rendered dynamically via JS -->
+        </div>
+
+        <!-- Student Roster Container (Table View - Hidden by default) -->
+        <div id="tableContainer" class="hidden bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-slate-50 text-slate-600 text-xs font-bold uppercase tracking-wider border-b border-slate-200">
+                            <th class="py-4 px-4 sm:px-6">Сурагч</th>
+                            <th class="py-4 px-4">Хүйс</th>
+                            <th class="py-4 px-4 text-right">Үйлдэл</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody" class="divide-y divide-slate-100 text-sm text-slate-700">
+                        <!-- Table rows rendered dynamically via JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Empty State Message -->
+        <div id="emptyState" class="hidden text-center py-16 bg-white rounded-3xl border border-slate-200 shadow-sm my-6">
+            <div class="w-16 h-16 bg-slate-100 text-slate-400 rounded-full flex items-center justify-center mx-auto mb-4">
+                <i class="fa-solid fa-user-slash text-2xl"></i>
+            </div>
+            <h3 class="text-lg font-bold text-slate-700 mb-1">Сурагч олдсонгүй</h3>
+            <p class="text-slate-500 text-sm max-w-md mx-auto mb-6">Хайсан шалгуурт тохирох сурагч байхгүй байна эсвэл жагсаалт хоосон байна.</p>
+            <button onclick="protectedOpenAddModal()" class="bg-berkh-navy text-white px-4 py-2 rounded-xl text-sm font-semibold hover:bg-slate-800 transition-all inline-flex items-center gap-2">
+                <i class="fa-solid fa-plus text-xs"></i> Шинэ сурагч нэмэх
+            </button>
+        </div>
+
+    </main>
+
+    <!-- DETAILED VIEW MODAL -->
+    <div id="detailModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 modal-backdrop">
+        <div class="bg-white rounded-3xl shadow-2xl max-w-lg w-full overflow-hidden transform transition-all border border-slate-100 relative max-h-[90vh] flex flex-col">
+            <!-- Modal Header Banner -->
+            <div class="bg-gradient-to-r from-berkh-blue to-berkh-navy p-6 text-white relative">
+                <button onclick="closeDetailModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-all">
+                    <i class="fa-solid fa-xmark text-sm"></i>
+                </button>
+                <div class="flex items-center gap-5">
+                    <div id="modalAvatarBg" class="w-28 h-28 rounded-2xl bg-slate-200 border-2 border-amber-400 overflow-hidden flex-shrink-0 shadow-xl relative group">
+                        <img id="modalAvatar" src="" alt="Student" class="w-full h-full object-cover cursor-pointer">
+                    </div>
+                    <div>
+                        <span id="modalGenderBadge" class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-white/20 text-white mb-1.5">
+                            -
+                        </span>
+                        <h3 id="modalFullName" class="text-xl font-bold text-white leading-snug"></h3>
+                        <p id="modalStudentCode" class="text-xs text-amber-300 font-medium mt-1">Бэрх ОУС • 10Б Анги</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Content Body -->
+            <div class="p-6 overflow-y-auto space-y-4">
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-slate-50 p-3.5 rounded-2xl border border-slate-100">
+                        <p class="text-xs text-slate-400 font-medium mb-1"><i class="fa-solid fa-id-card mr-1.5 text-berkh-navy"></i> Овог</p>
+                        <p id="modalLastName" class="font-semibold text-slate-800 text-sm sm:text-base">-</p>
+                    </div>
+                    <div class="bg-slate-50 p-3.5 rounded-2xl border border-slate-100">
+                        <p class="text-xs text-slate-400 font-medium mb-1"><i class="fa-solid fa-user mr-1.5 text-berkh-navy"></i> Нэр</p>
+                        <p id="modalFirstName" class="font-semibold text-slate-800 text-sm sm:text-base">-</p>
+                    </div>
+                </div>
+
+                <div class="bg-slate-50 p-3.5 rounded-2xl border border-slate-100">
+                    <p class="text-xs text-slate-400 font-medium mb-1"><i class="fa-solid fa-cake-candles mr-1.5 text-amber-500"></i> Төрсөн огноо</p>
+                    <div class="flex items-center justify-between">
+                        <p id="modalBirthdate" class="font-semibold text-slate-800 text-sm sm:text-base">-</p>
+                        <span id="modalAgeBadge" class="text-xs font-semibold bg-amber-100 text-amber-800 px-2 py-0.5 rounded-md">
+                            - нас
+                        </span>
+                    </div>
+                </div>
+
+                <div class="bg-slate-50 p-3.5 rounded-2xl border border-slate-100">
+                    <p class="text-xs text-slate-400 font-medium mb-1"><i class="fa-solid fa-phone mr-1.5 text-emerald-500"></i> Утасны дугаар</p>
+                    <div class="flex items-center justify-between">
+                        <p id="modalPhone" onclick="copyToClipboard(this.innerText)" class="font-semibold text-slate-800 text-sm sm:text-base cursor-pointer hover:text-emerald-600 transition-colors" title="Дарж хуулах">-</p>
+                        <button id="modalPhoneCopyBtn" type="button" class="text-xs font-semibold text-emerald-700 hover:text-emerald-800 bg-emerald-100/80 hover:bg-emerald-200 px-3 py-1.5 rounded-xl border border-emerald-300/60 transition-all flex items-center gap-1.5 shadow-sm">
+                            <i class="fa-solid fa-copy text-xs"></i> Хуулах
+                        </button>
+                    </div>
+                </div>
+
+                <!-- MOES Email -->
+                <div class="bg-slate-50 p-3.5 rounded-2xl border border-slate-100">
+                    <p class="text-xs text-slate-400 font-medium mb-1"><i class="fa-solid fa-envelope mr-1.5 text-blue-500"></i> MOES имэйл хаяг</p>
+                    <div class="flex items-center justify-between overflow-hidden">
+                        <p id="modalEmail" onclick="copyToClipboard(this.innerText)" class="font-semibold text-slate-800 text-sm sm:text-base truncate mr-2 cursor-pointer hover:text-blue-600 transition-colors" title="Дарж хуулах">-</p>
+                        <button id="modalEmailCopyBtn" type="button" class="text-xs font-semibold text-blue-700 hover:text-blue-800 bg-blue-100/80 hover:bg-blue-200 px-3 py-1.5 rounded-xl border border-blue-300/60 flex-shrink-0 transition-all flex items-center gap-1.5 shadow-sm">
+                            <i class="fa-solid fa-copy text-xs"></i> Хуулах
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Berkh Email -->
+                <div class="bg-slate-50 p-3.5 rounded-2xl border border-slate-100">
+                    <p class="text-xs text-slate-400 font-medium mb-1"><i class="fa-solid fa-envelope-open mr-1.5 text-indigo-500"></i> Berkh имэйл хаяг</p>
+                    <div class="flex items-center justify-between overflow-hidden">
+                        <p id="modalEmail2" onclick="copyToClipboard(this.innerText)" class="font-semibold text-slate-800 text-sm sm:text-base truncate mr-2 cursor-pointer hover:text-indigo-600 transition-colors" title="Дарж хуулах">-</p>
+                        <button id="modalEmail2CopyBtn" type="button" class="text-xs font-semibold text-indigo-700 hover:text-indigo-800 bg-indigo-100/80 hover:bg-indigo-200 px-3 py-1.5 rounded-xl border border-indigo-300/60 flex-shrink-0 transition-all flex items-center gap-1.5 shadow-sm">
+                            <i class="fa-solid fa-copy text-xs"></i> Хуулах
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="p-4 bg-slate-50 border-t border-slate-100 flex justify-end gap-2">
+                <button id="modalEditBtn" class="bg-amber-500 hover:bg-amber-600 text-white px-4 py-2 rounded-xl text-sm font-semibold transition-all flex items-center gap-2">
+                    <i class="fa-solid fa-pen-to-square text-xs"></i> Мэдээлэл засах
+                </button>
+                <button onclick="closeDetailModal()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 px-4 py-2 rounded-xl text-sm font-semibold transition-all">
+                    Хаах
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ADD / EDIT STUDENT MODAL -->
+    <div id="formModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 modal-backdrop">
+        <div class="bg-white rounded-3xl shadow-2xl max-w-lg w-full overflow-hidden border border-slate-100 max-h-[90vh] flex flex-col">
+            <div class="bg-gradient-to-r from-berkh-crimson to-berkh-red text-white px-6 py-4 flex justify-between items-center border-b border-berkh-crimson">
+                <h3 id="formModalTitle" class="text-lg font-bold flex items-center gap-2">
+                    <i class="fa-solid fa-user-plus text-berkh-gold"></i> Шинэ сурагч нэмэх
+                </h3>
+                <button onclick="closeFormModal()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-all">
+                    <i class="fa-solid fa-xmark text-sm"></i>
+                </button>
+            </div>
+
+            <form id="studentForm" onsubmit="handleFormSubmit(event)" class="p-6 overflow-y-auto space-y-4 flex-grow">
+                <input type="hidden" id="studentId">
+
+                <!-- Last Name & First Name -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Овог <span class="text-red-500">*</span></label>
+                        <input type="text" id="inputLastName" required placeholder="жишээ нь: Батжаргал" 
+                            class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-berkh-red/30 focus:border-berkh-red">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Нэр <span class="text-red-500">*</span></label>
+                        <input type="text" id="inputFirstName" required placeholder="жишээ нь: Амирлан" 
+                            class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-berkh-red/30 focus:border-berkh-red">
+                    </div>
+                </div>
+
+                <!-- Gender & Birth Date -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Хүйс <span class="text-red-500">*</span></label>
+                        <select id="inputGender" required class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-berkh-red/30 focus:border-berkh-red">
+                            <option value="Эрэгтэй">Эрэгтэй</option>
+                            <option value="Эмэгтэй">Эмэгтэй</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Төрсөн огноо <span class="text-red-500">*</span></label>
+                        <input type="date" id="inputBirthdate" required 
+                            class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-berkh-red/30 focus:border-berkh-red">
+                    </div>
+                </div>
+
+                <!-- Phone & MOES Email -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">Утасны дугаар <span class="text-red-500">*</span></label>
+                        <input type="tel" id="inputPhone" required placeholder="99112233" 
+                            class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-berkh-red/30 focus:border-berkh-red">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 mb-1">MOES имэйл хаяг <span class="text-red-500">*</span></label>
+                        <input type="email" id="inputEmail" required placeholder="student@moes.edu.mn" 
+                            class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-berkh-red/30 focus:border-berkh-red">
+                    </div>
+                </div>
+
+                <!-- Berkh Email -->
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Berkh имэйл хаяг</label>
+                    <input type="email" id="inputEmail2" placeholder="student@berkh.edu.mn" 
+                        class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-berkh-red/30 focus:border-berkh-red">
+                </div>
+
+                <!-- Profile Photo Upload / URL -->
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Зургийн URL эсвэл Файл оруулах</label>
+                    <div class="space-y-2">
+                        <input type="text" id="inputPhotoUrl" placeholder="https://example.com/photo.jpg" oninput="previewImageFromInput()"
+                            class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-berkh-red/30 focus:border-berkh-red">
+                        
+                        <div class="flex items-center gap-3">
+                            <label class="cursor-pointer bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 px-3 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-2 transition-all">
+                                <i class="fa-solid fa-upload"></i> Зураг сонгох
+                                <input type="file" id="inputFile" accept="image/*" class="hidden" onchange="handleFileSelect(event)">
+                            </label>
+                            <span id="fileNameLabel" class="text-xs text-slate-400 truncate">Файл сонгоогүй</span>
+                        </div>
+                    </div>
+
+                    <!-- Image Preview Box -->
+                    <div class="mt-3 flex items-center gap-3 bg-slate-50 p-2.5 rounded-xl border border-slate-200">
+                        <div class="w-12 h-12 rounded-lg bg-slate-200 overflow-hidden flex-shrink-0">
+                            <img id="formPhotoPreview" src="https://placehold.co/150x150/a81146/ffffff?text=Зураг" class="w-full h-full object-cover">
+                        </div>
+                        <span class="text-xs text-slate-500">Зургийн урьдчилан харах хэсэг. Хэрэв хоосон байвал автоматаар зураг оноогдоно.</span>
+                    </div>
+                </div>
+
+                <!-- Form Modal Footer -->
+                <div class="pt-4 border-t border-slate-100 flex justify-end gap-2">
+                    <button type="button" onclick="closeFormModal()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all">
+                        Цуцлах
+                    </button>
+                    <button type="submit" class="bg-berkh-red hover:bg-berkh-crimson text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition-all shadow-md flex items-center gap-2">
+                        <i class="fa-solid fa-floppy-disk"></i> Хадгалах
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- CUSTOM CONFIRM DELETE MODAL -->
+    <div id="deleteModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 modal-backdrop">
+        <div class="bg-white rounded-3xl shadow-2xl max-w-sm w-full p-6 border border-slate-100 text-center">
+            <div class="w-14 h-14 bg-red-100 text-red-600 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                <i class="fa-solid fa-triangle-exclamation text-2xl"></i>
+            </div>
+            <h3 class="text-lg font-bold text-slate-800 mb-2">Сурагч устгах уу?</h3>
+            <p class="text-slate-500 text-xs sm:text-sm mb-6 leading-relaxed">
+                Та <strong id="deleteStudentName" class="text-slate-800"></strong> сурагчийг жагсаалтаас устгахдаа итгэлтэй байна уу? Энэ үйлдлийг буцаах боломжгүй.
+            </p>
+            <div class="flex items-center justify-center gap-3">
+                <button onclick="closeDeleteModal()" class="w-1/2 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-sm font-semibold transition-all">
+                    Болих
+                </button>
+                <button id="confirmDeleteBtn" class="w-1/2 py-2.5 bg-red-600 hover:bg-red-700 text-white rounded-xl text-sm font-semibold shadow-md transition-all">
+                    Устгах
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCHOOL LOGO EDIT MODAL -->
+    <div id="logoModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 modal-backdrop">
+        <div class="bg-white rounded-3xl shadow-2xl max-w-md w-full overflow-hidden border border-slate-100 flex flex-col">
+            <div class="bg-berkh-blue text-white px-6 py-4 flex justify-between items-center border-b border-berkh-navy">
+                <h3 class="text-lg font-bold flex items-center gap-2">
+                    <i class="fa-solid fa-shield-halved text-amber-400"></i> Сургуулийн лого солих
+                </h3>
+                <button onclick="closeLogoModal()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-all">
+                    <i class="fa-solid fa-xmark text-sm"></i>
+                </button>
+            </div>
+
+            <div class="p-6 space-y-5">
+                <!-- Preview -->
+                <div class="flex flex-col items-center justify-center bg-slate-50 p-4 rounded-2xl border border-slate-200">
+                    <div id="logoPreviewBox" class="w-24 h-24 rounded-2xl p-3 shadow-md border-2 border-amber-400 flex items-center justify-center overflow-hidden mb-2">
+                        <div id="logoModalDisplay" class="w-full h-full flex items-center justify-center"></div>
+                    </div>
+                    <span class="text-xs text-slate-500 font-medium">Одоогийн логоны харагдац</span>
+                </div>
+
+                <!-- Upload File / URL -->
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Шинэ лого оруулах</label>
+                    <div class="space-y-2">
+                        <input type="text" id="inputLogoUrl" placeholder="https://example.com/logo.png" oninput="previewLogoFromUrl()"
+                            class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-berkh-red/30 focus:border-berkh-red">
+                        
+                        <div class="flex items-center gap-3">
+                            <label class="cursor-pointer bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 px-3.5 py-2 rounded-xl text-xs font-semibold flex items-center gap-2 transition-all">
+                                <i class="fa-solid fa-upload"></i> Зураг сонгох
+                                <input type="file" id="inputLogoFile" accept="image/*" class="hidden" onchange="handleLogoFileSelect(event)">
+                            </label>
+                            <span id="logoFileNameLabel" class="text-xs text-slate-400 truncate">Файл сонгоогүй</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Logo Background Color -->
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Логоны арын өнгө</label>
+                    <div class="flex items-center gap-3">
+                        <input type="color" id="inputLogoBgColor" value="#ffffff" onchange="updateLogoPreviewBg(this.value)" class="w-10 h-10 rounded-xl border border-slate-300 cursor-pointer p-0.5 bg-white shadow-sm">
+                        <span class="text-xs text-slate-500">Логоны арын дэвсгэр өнгийг сонгох</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-4 bg-slate-50 border-t border-slate-100 flex items-center justify-between">
+                <button type="button" onclick="resetSchoolLogo()" class="text-xs text-red-600 hover:text-red-700 font-semibold px-3 py-2 rounded-xl hover:bg-red-50 transition-all flex items-center gap-1.5">
+                    <i class="fa-solid fa-rotate-left"></i> Анхны лого руу буцаах
+                </button>
+
+                <div class="flex gap-2">
+                    <button type="button" onclick="closeLogoModal()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 px-4 py-2 rounded-xl text-sm font-semibold transition-all">
+                        Цуцлах
+                    </button>
+                    <button type="button" onclick="saveSchoolLogo()" class="bg-berkh-blue hover:bg-berkh-navy text-white px-4 py-2 rounded-xl text-sm font-semibold transition-all shadow-md">
+                        Хадгалах
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- IMAGE CROPPER MODAL -->
+    <div id="cropModal" class="fixed inset-0 z-[90] hidden flex items-center justify-center p-4 modal-backdrop">
+        <div class="bg-white rounded-3xl shadow-2xl max-w-lg w-full overflow-hidden border border-slate-100 flex flex-col max-h-[90vh]">
+            <div class="bg-berkh-blue text-white px-6 py-4 flex justify-between items-center border-b border-berkh-navy">
+                <h3 class="text-base font-bold flex items-center gap-2">
+                    <i class="fa-solid fa-crop-simple text-amber-400"></i> Зураг тайрах, засах
+                </h3>
+                <button onclick="closeCropModal()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-all">
+                    <i class="fa-solid fa-xmark text-sm"></i>
+                </button>
+            </div>
+            <div class="p-4 overflow-y-auto space-y-4 flex-grow flex flex-col items-center">
+                <div class="w-full max-h-[350px] bg-slate-900 rounded-2xl overflow-hidden flex items-center justify-center">
+                    <img id="cropImage" src="" alt="Crop target" class="max-w-full max-h-[350px]">
+                </div>
+                <div class="flex flex-wrap items-center justify-center gap-2 w-full">
+                    <button type="button" onclick="cropperZoom(0.1)" class="p-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-semibold">
+                        <i class="fa-solid fa-magnifying-glass-plus"></i> Томруулах
+                    </button>
+                    <button type="button" onclick="cropperZoom(-0.1)" class="p-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-semibold">
+                        <i class="fa-solid fa-magnifying-glass-minus"></i> Жижигсгэх
+                    </button>
+                    <button type="button" onclick="cropperRotate(-90)" class="p-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-semibold">
+                        <i class="fa-solid fa-rotate-left"></i> Эргүүлэх (-90°)
+                    </button>
+                    <button type="button" onclick="cropperRotate(90)" class="p-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-semibold">
+                        <i class="fa-solid fa-rotate-right"></i> Эргүүлэх (+90°)
+                    </button>
+                    <button type="button" onclick="cropperReset()" class="p-2 bg-slate-100 hover:bg-slate-200 text-slate-700 rounded-xl text-xs font-semibold">
+                        <i class="fa-solid fa-arrows-rotate"></i> Анхны хэвэнд
+                    </button>
+                </div>
+                <div class="flex items-center gap-3 w-full bg-slate-50 p-3 rounded-2xl border border-slate-200">
+                    <label class="text-xs font-semibold text-slate-700">Арын дэвсгэр өнгө:</label>
+                    <input type="color" id="cropBgColor" value="#ffffff" onchange="setCropBgPreset(this.value)" class="w-8 h-8 rounded-lg border border-slate-300 cursor-pointer p-0.5 bg-white">
+                    <button type="button" onclick="setCropBgPreset('transparent')" class="text-xs bg-slate-200 hover:bg-slate-300 px-2.5 py-1 rounded-lg font-medium text-slate-700">Тунгалаг</button>
+                    <button type="button" onclick="setCropBgPreset('#ffffff')" class="text-xs bg-white border border-slate-300 hover:bg-slate-100 px-2.5 py-1 rounded-lg font-medium text-slate-700">Цагаан</button>
+                </div>
+            </div>
+            <div class="p-4 bg-slate-50 border-t border-slate-100 flex justify-end gap-2">
+                <button type="button" onclick="closeCropModal()" class="bg-slate-200 hover:bg-slate-300 text-slate-700 px-4 py-2 rounded-xl text-sm font-semibold transition-all">
+                    Цуцлах
+                </button>
+                <button type="button" onclick="applyCrop()" class="bg-berkh-blue hover:bg-berkh-navy text-white px-4 py-2 rounded-xl text-sm font-semibold transition-all shadow-md">
+                    <i class="fa-solid fa-check mr-1"></i> Зураг бэлэн болгох
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FULLSCREEN IMAGE ZOOM MODAL -->
+    <div id="imageZoomModal" class="fixed inset-0 z-[100] hidden flex flex-col items-center justify-center p-4 modal-backdrop" onclick="closeImageZoomModal(event)">
+        <div class="relative max-w-4xl max-h-[90vh] flex flex-col items-center">
+            <button onclick="closeImageZoomModal()" class="absolute -top-12 right-0 w-10 h-10 rounded-full bg-white/20 hover:bg-white/40 text-white flex items-center justify-center text-lg transition-all">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <img id="zoomedImage" src="" alt="Zoomed view" class="max-w-full max-h-[80vh] object-contain rounded-2xl shadow-2xl border-2 border-white/20">
+            <p id="zoomedCaption" class="text-white text-sm font-bold mt-3 bg-black/60 px-4 py-1.5 rounded-full backdrop-blur-md"></p>
+        </div>
+    </div>
+
+    <!-- TEACHER PASSWORD VERIFICATION MODAL -->
+    <div id="passwordModal" class="fixed inset-0 z-[80] hidden flex items-center justify-center p-4 modal-backdrop">
+        <div class="bg-white rounded-3xl shadow-2xl max-w-sm w-full overflow-hidden border border-slate-100 flex flex-col">
+            <div class="bg-berkh-blue text-white px-6 py-4 flex justify-between items-center border-b border-berkh-navy">
+                <h3 class="text-base font-bold flex items-center gap-2">
+                    <i class="fa-solid fa-shield-halved text-amber-400"></i> Нууц код шалгах
+                </h3>
+                <button onclick="closePasswordModal()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-all">
+                    <i class="fa-solid fa-xmark text-sm"></i>
+                </button>
+            </div>
+            <form onsubmit="handlePasswordAuthSubmit(event)" class="p-6 space-y-4">
+                <div class="text-center mb-2">
+                    <div class="w-12 h-12 bg-amber-100 text-amber-700 rounded-2xl flex items-center justify-center mx-auto mb-2">
+                        <i class="fa-solid fa-lock text-xl"></i>
+                    </div>
+                    <p class="text-xs font-semibold text-slate-500 uppercase tracking-wider">Эрх баталгаажуулалт</p>
+                    <p id="passwordActionTitle" class="text-sm font-bold text-slate-800 mt-1">Үйлдэл хийх</p>
+                </div>
+
+                <div>
+                    <label id="passwordModalLabel" class="block text-xs font-semibold text-slate-700 mb-1">Багшийн нууц үг</label>
+                    <input type="password" id="inputAuthPassword" required placeholder="Нууц үг оруулна уу"
+                        class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-berkh-blue/30 focus:border-berkh-blue">
+                </div>
+
+                <div id="passwordErrorMsg" class="hidden text-xs text-red-600 bg-red-50 border border-red-200 p-2.5 rounded-xl text-center font-semibold">
+                    Нууц үг буруу байна!
+                </div>
+
+                <div class="flex items-center justify-end gap-2 pt-2">
+                    <button type="button" onclick="closePasswordModal()" class="w-1/2 bg-slate-100 hover:bg-slate-200 text-slate-700 py-2.5 rounded-xl text-xs font-semibold transition-all">
+                        Цуцлах
+                    </button>
+                    <button type="submit" class="w-1/2 bg-berkh-blue hover:bg-berkh-navy text-white py-2.5 rounded-xl text-xs font-semibold transition-all shadow-md flex items-center justify-center gap-1.5">
+                        <i class="fa-solid fa-key"></i> Нэвтрэх
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- TEACHER CHANGE PASSWORD MODAL -->
+    <div id="changePasswordModal" class="fixed inset-0 z-[80] hidden flex items-center justify-center p-4 modal-backdrop">
+        <div class="bg-white rounded-3xl shadow-2xl max-w-sm w-full overflow-hidden border border-slate-100 flex flex-col">
+            <div class="bg-berkh-crimson text-white px-6 py-4 flex justify-between items-center border-b border-berkh-red">
+                <h3 class="text-base font-bold flex items-center gap-2">
+                    <i class="fa-solid fa-key text-amber-300"></i> Багшийн нууц үг солих
+                </h3>
+                <button onclick="closeChangePasswordModal()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-all">
+                    <i class="fa-solid fa-xmark text-sm"></i>
+                </button>
+            </div>
+            <form id="changePasswordForm" onsubmit="handleChangePasswordSubmit(event)" class="p-6 space-y-3.5">
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Одоогийн нууц үг <span class="text-red-500">*</span></label>
+                    <input type="password" id="inputCurrentPassword" required placeholder="Одоогийн нууц үг"
+                        class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-berkh-red/30 focus:border-berkh-red">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Шинэ нууц үг <span class="text-red-500">*</span></label>
+                    <input type="password" id="inputNewPassword" required minlength="4" placeholder="Шинэ нууц үг (дор хаяж 4 тэмдэгт)"
+                        class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-berkh-red/30 focus:border-berkh-red">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-slate-700 mb-1">Шинэ нууц үг дахин оруулна уу <span class="text-red-500">*</span></label>
+                    <input type="password" id="inputConfirmPassword" required minlength="4" placeholder="Нууц үг давтах"
+                        class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-berkh-red/30 focus:border-berkh-red">
+                </div>
+
+                <div id="changePasswordErrorMsg" class="hidden text-xs text-red-600 bg-red-50 border border-red-200 p-2.5 rounded-xl text-center font-semibold">
+                </div>
+
+                <div class="flex items-center justify-end gap-2 pt-2">
+                    <div class="flex gap-2">
+                        <button type="button" onclick="closeChangePasswordModal()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-2 rounded-xl text-xs font-semibold transition-all">
+                            Цуцлах
+                        </button>
+                        <button type="submit" class="bg-berkh-crimson hover:bg-berkh-red text-white px-4 py-2 rounded-xl text-xs font-semibold transition-all shadow-md flex items-center justify-center gap-1.5">
+                            <i class="fa-solid fa-floppy-disk"></i> Хадгалах
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- VIEW CODE CHANGE MODAL -->
+    <div id="viewCodeModal" class="fixed inset-0 z-[80] hidden flex items-center justify-center p-4 modal-backdrop">
+        <div class="bg-white rounded-3xl shadow-2xl max-w-sm w-full overflow-hidden border border-slate-100">
+            <div class="bg-berkh-crimson text-white px-6 py-4 flex justify-between items-center">
+                <h3 class="text-base font-bold flex items-center gap-2"><i class="fa-solid fa-user-lock text-amber-300"></i> Профайл үзэх код солих</h3>
+                <button onclick="closeViewCodeModal()" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center"><i class="fa-solid fa-xmark text-sm"></i></button>
+            </div>
+            <form id="viewCodeForm" onsubmit="handleViewCodeSubmit(event)" class="p-6 space-y-3.5">
+                <input type="password" id="inputNewViewCode" required minlength="4" placeholder="Шинэ код (дор хаяж 4 тэмдэгт)" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-berkh-red/30">
+                <input type="password" id="inputConfirmViewCode" required minlength="4" placeholder="Шинэ код давтах" class="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-berkh-red/30">
+                <div id="viewCodeErrorMsg" class="hidden text-xs text-red-600 bg-red-50 border border-red-200 p-2.5 rounded-xl text-center font-semibold"></div>
+                <div class="flex justify-end gap-2 pt-2">
+                    <button type="button" onclick="closeViewCodeModal()" class="bg-slate-100 hover:bg-slate-200 text-slate-700 px-3 py-2 rounded-xl text-xs font-semibold">Цуцлах</button>
+                    <button type="submit" class="bg-berkh-crimson hover:bg-berkh-red text-white px-4 py-2 rounded-xl text-xs font-semibold flex items-center gap-1.5"><i class="fa-solid fa-floppy-disk"></i> Хадгалах</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toastNotification" class="fixed bottom-6 right-6 z-[100] transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none bg-slate-900/90 backdrop-blur-md text-white px-4 py-3 rounded-2xl shadow-2xl flex items-center gap-3 border border-slate-700/50">
+        <div class="w-8 h-8 bg-emerald-500/20 text-emerald-400 rounded-xl flex items-center justify-center flex-shrink-0">
+            <i class="fa-solid fa-check"></i>
+        </div>
+        <div>
+            <p id="toastMessage" class="text-xs font-semibold text-slate-200">Хуулагдлаа!</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-berkh-crimson text-pink-200 border-t border-berkh-red/40 py-6 mt-12 text-xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center space-x-3">
+                <div id="footerLogoDisplay" class="h-8 w-8 bg-white/90 rounded p-0.5 flex items-center justify-center overflow-hidden">
+                    <!-- Dynamic Footer Logo -->
+                </div>
+                <span class="text-white font-semibold">Бэрх Олон Улсын Сургууль (Berkh International School)</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <p>© 2026 10Б Ангийн веб сайт. Бүх эрх хуулиар хамгаалагдсан.</p>
+                <button onclick="openViewCodeModal()" class="opacity-25 hover:opacity-100 transition-opacity text-pink-200 hover:text-amber-300 p-1 ml-1" title="Профайл үзэх код солих (Багш)">
+                    <i class="fa-solid fa-user-lock text-xs"></i>
+                </button>
+                <button onclick="setupGithubToken()" class="opacity-25 hover:opacity-100 transition-opacity text-pink-200 hover:text-amber-300 p-1 ml-1" title="GitHub холболт (Багш)">
+                    <i class="fa-solid fa-cloud-arrow-up text-xs"></i>
+                </button>
+                <!-- Secret / Discrete Teacher Password Key Button -->
+                <button onclick="openChangePasswordModal()" class="opacity-25 hover:opacity-100 transition-opacity text-pink-200 hover:text-amber-300 p-1 ml-1" title="Багшийн нууц үг солих">
+                    <i class="fa-solid fa-key text-xs"></i>
+                </button>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const DEFAULT_TEACHER_PASSWORD = '9988';
+
+        function getTeacherPassword() {
+            return localStorage.getItem('berkh_10b_teacher_password') || DEFAULT_TEACHER_PASSWORD;
+        }
+
+        function copyToClipboard(text, element) {
+            if (!text || text === '-' || text === 'Байхгүй') return;
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.position = "fixed";
+            textArea.style.left = "-9999px";
+            textArea.style.top = "-9999px";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            
+            try {
+                document.execCommand('copy');
+                showToast(`"${text}" хуулагдлаа!`);
+                if (element && element.tagName === 'BUTTON') {
+                    const originalHtml = element.innerHTML;
+                    element.innerHTML = '<i class="fa-solid fa-check text-xs"></i> Хуулсан!';
+                    element.classList.add('bg-emerald-200', 'text-emerald-800');
+                    setTimeout(() => {
+                        element.innerHTML = originalHtml;
+                        element.classList.remove('bg-emerald-200', 'text-emerald-800');
+                    }, 1500);
+                }
+            } catch (err) {
+                console.error('Copy error', err);
+            }
+            
+            document.body.removeChild(textArea);
+        }
+
+        function showToast(message) {
+            const toast = document.getElementById('toastNotification');
+            const toastMsg = document.getElementById('toastMessage');
+            if (!toast || !toastMsg) return;
+            
+            toastMsg.innerText = message;
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            if (window.toastTimeout) clearTimeout(window.toastTimeout);
+            window.toastTimeout = setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 2500);
+        }
+
+        const DEFAULT_LOGO_SVG = `
+            <img src="images/Logo_mgl.png" alt="Сургуулийн лого" class="w-full h-full object-contain">
+        `;
+
+        const INITIAL_STUDENTS = [
+            { id: '1', lastName: 'Батбаяр', firstName: 'Анар', gender: 'Эрэгтэй', birthdate: '2009-03-15', phone: '99111234', email: 'anar.b@moes.edu.mn', email2: 'anar.b@berkh.edu.mn', photo: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=400&auto=format&fit=crop&q=80' },
+            { id: '2', lastName: 'Нямсүрэн', firstName: 'Амин-Эрдэнэ', gender: 'Эмэгтэй', birthdate: '2009-07-22', phone: '99222345', email: 'aminerdene.n@moes.edu.mn', email2: 'aminerdene.n@berkh.edu.mn', photo: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400&auto=format&fit=crop&q=80' },
+            { id: '3', lastName: 'Ганзориг', firstName: 'Болд', gender: 'Эрэгтэй', birthdate: '2009-01-10', phone: '99333456', email: 'bold.g@moes.edu.mn', email2: 'bold.g@berkh.edu.mn', photo: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&auto=format&fit=crop&q=80' },
+            { id: '4', lastName: 'Дорж', firstName: 'Номин', gender: 'Эмэгтэй', birthdate: '2009-11-05', phone: '99444567', email: 'nomin.d@moes.edu.mn', email2: 'nomin.d@berkh.edu.mn', photo: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&auto=format&fit=crop&q=80' },
+            { id: '5', lastName: 'Эрдэнэбат', firstName: 'Тэмүүлэн', gender: 'Эрэгтэй', birthdate: '2009-05-18', phone: '99555678', email: 'temuulen.e@moes.edu.mn', email2: 'temuulen.e@berkh.edu.mn', photo: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&auto=format&fit=crop&q=80' },
+            { id: '6', lastName: 'Сувд-Эрдэнэ', firstName: 'Хулан', gender: 'Эмэгтэй', birthdate: '2009-08-30', phone: '99666789', email: 'khulan.s@moes.edu.mn', email2: 'khulan.s@berkh.edu.mn', photo: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80' },
+            { id: '7', lastName: 'Баатар', firstName: 'Билгүүн', gender: 'Эрэгтэй', birthdate: '2009-04-12', phone: '99777890', email: 'bilguun.b@moes.edu.mn', email2: 'bilguun.b@berkh.edu.mn', photo: 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=400&auto=format&fit=crop&q=80' },
+            { id: '8', lastName: 'Мөнх-Эрдэнэ', firstName: 'Энхжин', gender: 'Эмэгтэй', birthdate: '2009-12-14', phone: '99888901', email: 'enkhjin.m@moes.edu.mn', email2: 'enkhjin.m@berkh.edu.mn', photo: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=400&auto=format&fit=crop&q=80' },
+            { id: '9', lastName: 'Лхагвасүрэн', firstName: 'Мөнх-Оргил', gender: 'Эрэгтэй', birthdate: '2009-02-28', phone: '99000112', email: 'munkhorgil.l@moes.edu.mn', email2: 'munkhorgil.l@berkh.edu.mn', photo: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&auto=format&fit=crop&q=80' },
+            { id: '10', lastName: 'Пүрэвдорж', firstName: 'Мишээл', gender: 'Эмэгтэй', birthdate: '2009-09-09', phone: '99112233', email: 'misheel.p@moes.edu.mn', email2: 'misheel.p@berkh.edu.mn', photo: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&auto=format&fit=crop&q=80' },
+            { id: '11', lastName: 'Даваажав', firstName: 'Ирмүүн', gender: 'Эрэгтэй', birthdate: '2009-06-25', phone: '99223344', email: 'irmuun.d@moes.edu.mn', email2: 'irmuun.d@berkh.edu.mn', photo: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&auto=format&fit=crop&q=80' },
+            { id: '12', lastName: 'Жаргалсайхан', firstName: 'Сарнай', gender: 'Эмэгтэй', birthdate: '2009-10-17', phone: '99334455', email: 'sarnai.j@moes.edu.mn', email2: 'sarnai.j@berkh.edu.mn', photo: 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=400&auto=format&fit=crop&q=80' },
+            { id: '13', lastName: 'Чинбат', firstName: 'Алдар', gender: 'Эрэгтэй', birthdate: '2009-01-20', phone: '99445566', email: 'aldar.ch@moes.edu.mn', email2: 'aldar.ch@berkh.edu.mn', photo: 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&auto=format&fit=crop&q=80' },
+            { id: '14', lastName: 'Бат-Эрдэнэ', firstName: 'Анужин', gender: 'Эмэгтэй', birthdate: '2009-05-04', phone: '99556677', email: 'anujin.b@moes.edu.mn', email2: 'anujin.b@berkh.edu.mn', photo: 'https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?w=400&auto=format&fit=crop&q=80' },
+            { id: '15', lastName: 'Отгонбаатар', firstName: 'Төгөлдөр', gender: 'Эрэгтэй', birthdate: '2009-07-11', phone: '99667788', email: 'tuguldur.o@moes.edu.mn', email2: 'tuguldur.o@berkh.edu.mn', photo: 'https://images.unsplash.com/photo-1463453091185-61582044d556?w=400&auto=format&fit=crop&q=80' },
+            { id: '16', lastName: 'Хүрэлбаатар', firstName: 'Уянга', gender: 'Эмэгтэй', birthdate: '2009-03-29', phone: '99778899', email: 'uyanga.kh@moes.edu.mn', email2: 'uyanga.kh@berkh.edu.mn', photo: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?w=400&auto=format&fit=crop&q=80' },
+            { id: '17', lastName: 'Төмөрбаатар', firstName: 'Анар-Эрдэнэ', gender: 'Эрэгтэй', birthdate: '2009-11-21', phone: '99889900', email: 'anarerdene.t@moes.edu.mn', email2: 'anarerdene.t@berkh.edu.mn', photo: 'https://images.unsplash.com/photo-1501196354995-cbb51c65aaea?w=400&auto=format&fit=crop&q=80' },
+            { id: '18', lastName: 'Цэцэгмаа', firstName: 'Ариунзаяа', gender: 'Эмэгтэй', birthdate: '2009-08-08', phone: '99990011', email: 'ariunzaya.ts@moes.edu.mn', email2: 'ariunzaya.ts@berkh.edu.mn', photo: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&auto=format&fit=crop&q=80' },
+            { id: '19', lastName: 'Сүхбаатар', firstName: 'Бат-Оргил', gender: 'Эрэгтэй', birthdate: '2009-04-03', phone: '99001122', email: 'batorgil.s@moes.edu.mn', email2: 'batorgil.s@berkh.edu.mn', photo: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&auto=format&fit=crop&q=80' },
+            { id: '20', lastName: 'Дашдорж', firstName: 'Төгс-Эрдэнэ', gender: 'Эмэгтэй', birthdate: '2009-10-31', phone: '99113355', email: 'tugserdene.d@moes.edu.mn', email2: 'tugserdene.d@berkh.edu.mn', photo: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=400&auto=format&fit=crop&q=80' },
+            { id: '21', lastName: 'Ганболд', firstName: 'Алтангэрэл', gender: 'Эрэгтэй', birthdate: '2009-02-14', phone: '99224466', email: 'altangerel.g@moes.edu.mn', email2: 'altangerel.g@berkh.edu.mn', photo: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&auto=format&fit=crop&q=80' },
+            { id: '22', lastName: 'Алтансүх', firstName: 'Цэлмэг', gender: 'Эмэгтэй', birthdate: '2009-06-06', phone: '99335577', email: 'tselmeg.a@moes.edu.mn', email2: 'tselmeg.a@berkh.edu.mn', photo: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&auto=format&fit=crop&q=80' },
+            { id: '23', lastName: 'Баатархүү', firstName: 'Эрхэмбаяр', gender: 'Эрэгтэй', birthdate: '2009-09-19', phone: '99446688', email: 'erkhembayar.b@moes.edu.mn', email2: 'erkhembayar.b@berkh.edu.mn', photo: 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=400&auto=format&fit=crop&q=80' },
+            { id: '24', lastName: 'Оюунбат', firstName: 'Ундрах', gender: 'Эмэгтэй', birthdate: '2009-12-01', phone: '99557799', email: 'undrakh.o@moes.edu.mn', email2: 'undrakh.o@berkh.edu.mn', photo: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&auto=format&fit=crop&q=80' },
+            { id: '25', lastName: 'Байгальмаа', firstName: 'Золбоо', gender: 'Эрэгтэй', birthdate: '2009-03-08', phone: '99668800', email: 'zolboo.b@moes.edu.mn', email2: 'zolboo.b@berkh.edu.mn', photo: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=400&auto=format&fit=crop&q=80' },
+            { id: '26', lastName: 'Нэргүй', firstName: 'Нандин-Эрдэнэ', gender: 'Эмэгтэй', birthdate: '2009-05-15', phone: '99779911', email: 'nandinerdene.n@moes.edu.mn', email2: 'nandinerdene.n@berkh.edu.mn', photo: 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=400&auto=format&fit=crop&q=80' }
+        ];
+
+        let students = [];
+        let currentFilter = 'all';
+        let currentViewMode = 'grid'; // 'grid' or 'table'
+        let pendingDeleteId = null;
+        let cropper = null; // Cropper.js instance
+        let currentCropTarget = 'student'; // 'student' or 'logo'
+        let selectedCropBgColor = '#ffffff';
+
+        function setCropBgPreset(color) {
+            selectedCropBgColor = color;
+            const input = document.getElementById('cropBgColor');
+            if (input && color !== 'transparent') {
+                input.value = color;
+            }
+        }
+
+        window.onload = function() {
+            // Локал кэшийг шууд харуулаад, дараа нь GitHub-аас шинэчилнэ
+            try { students = JSON.parse(localStorage.getItem('berkh_10b_students')) || [...INITIAL_STUDENTS]; }
+            catch (e) { students = [...INITIAL_STUDENTS]; }
+            renderSchoolLogo();
+            renderRoster();
+            loadFromGitHub();
+
+            // Close Zoom Modal on Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    closeImageZoomModal();
+                }
+            });
+        };
+
+        function renderSchoolLogo() {
+            const savedLogo = localStorage.getItem('berkh_10b_school_logo');
+            const savedBgColor = localStorage.getItem('berkh_10b_school_logo_bg') || '#ffffff';
+            const headerContainer = document.getElementById('headerLogoContainer');
+            const headerDisplay = document.getElementById('schoolLogoDisplay');
+            const footerDisplay = document.getElementById('footerLogoDisplay');
+
+            if (headerContainer) headerContainer.style.backgroundColor = savedBgColor;
+            if (footerDisplay) footerDisplay.style.backgroundColor = savedBgColor;
+
+            if (savedLogo) {
+                const imgHtml = `<img src="${savedLogo}" alt="Logo" class="w-full h-full object-contain">`;
+                headerDisplay.innerHTML = imgHtml;
+                footerDisplay.innerHTML = imgHtml;
+            } else {
+                headerDisplay.innerHTML = DEFAULT_LOGO_SVG;
+                footerDisplay.innerHTML = DEFAULT_LOGO_SVG;
+            }
+        }
+
+        function saveToLocalStorage() {
+            try {
+                localStorage.setItem('berkh_10b_students', JSON.stringify(students));
+            } catch (e) { /* кэш дүүрсэн бол GitHub үндсэн хадгалалт хэвээр */ }
+            queueGithubSave();
+        }
+
+        // ================= GITHUB ХАДГАЛАЛТ =================
+        // GitHub Pages дээр owner/repo-г хаягаас автоматаар тодорхойлно (гараар засах шаардлагагүй)
+        const GH = (() => {
+            const onPages = location.hostname.endsWith('.github.io');
+            const seg = location.pathname.split('/')[1] || '';
+            return {
+                owner: onPages ? location.hostname.split('.')[0] : 'YOUR_GITHUB_USERNAME',
+                repo: onPages ? (seg && !seg.includes('.') ? seg : location.hostname) : 'YOUR_REPO_NAME',
+                branch: 'main',
+                dataPath: 'data/students.json',
+                photoDir: 'data/photos'
+            };
+        })();
+        const ghToken = () => localStorage.getItem('berkh_10b_gh_token') || '';
+        const ghApi = p => `https://api.github.com/repos/${GH.owner}/${GH.repo}/contents/${p}`;
+        const ghRaw = p => `https://raw.githubusercontent.com/${GH.owner}/${GH.repo}/${GH.branch}/${p}`;
+        const ghHeaders = () => ({ 'Accept': 'application/vnd.github+json', 'Authorization': 'Bearer ' + ghToken() });
+        const utf8ToB64 = s => btoa(unescape(encodeURIComponent(s)));
+
+        async function loadFromGitHub() {
+            try {
+                let r;
+                if (ghToken()) {
+                    r = await fetch(ghApi(GH.dataPath) + '?ref=' + GH.branch, {
+                        headers: { ...ghHeaders(), 'Accept': 'application/vnd.github.raw+json' }, cache: 'no-store' });
+                } else {
+                    r = await fetch(ghRaw(GH.dataPath) + '?t=' + Date.now(), { cache: 'no-store' });
+                }
+                if (r.status === 404) return showToast('GitHub дээр өгөгдөл хараахан алга. Эхний хадгалалтаар үүснэ.');
+                if (!r.ok) throw new Error(r.status);
+                const data = JSON.parse(await r.text());
+                if (Array.isArray(data.students)) {
+                    students = data.students;
+                    if (data.viewCodeHash) {
+                        viewCodeHash = data.viewCodeHash;
+                        try { localStorage.setItem('berkh_10b_view_hash', viewCodeHash); } catch (e) {}
+                    }
+                    try { localStorage.setItem('berkh_10b_students', JSON.stringify(students)); } catch (e) {}
+                    renderRoster();
+                }
+            } catch (e) {
+                showToast('GitHub-аас уншиж чадсангүй. Локал хуулбарыг харуулж байна.');
+            }
+        }
+
+        async function ghPut(path, contentB64, message) {
+            let sha;
+            const g = await fetch(ghApi(path) + '?ref=' + GH.branch, { headers: ghHeaders(), cache: 'no-store' });
+            if (g.ok) sha = (await g.json()).sha;
+            else if (g.status !== 404) throw new Error('GET ' + g.status);
+            const r = await fetch(ghApi(path), {
+                method: 'PUT',
+                headers: { ...ghHeaders(), 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message, content: contentB64, branch: GH.branch, ...(sha ? { sha } : {}) })
+            });
+            if (!r.ok) throw new Error('PUT ' + r.status);
+        }
+
+        let ghTimer = null, ghSaving = false, ghAgain = false;
+        function queueGithubSave() {
+            clearTimeout(ghTimer);
+            ghTimer = setTimeout(pushToGitHub, 800);
+        }
+
+        async function pushToGitHub() {
+            if (!ghToken()) return showToast('GitHub token тохируулаагүй. Зөвхөн энэ төхөөрөмжид хадгаллаа (☁ товч).');
+            if (ghSaving) { ghAgain = true; return; }
+            ghSaving = true;
+            try {
+                // Шинэ зургуудыг тусдаа файл болгон репо руу оруулна
+                for (const s of students) {
+                    const m = s.photo && s.photo.match(/^data:image\/(png|jpeg|webp);base64,(.+)$/);
+                    if (!m) continue;
+                    const path = `${GH.photoDir}/${s.id}-${Date.now()}.${m[1] === 'jpeg' ? 'jpg' : m[1]}`;
+                    await ghPut(path, m[2], 'Сурагчийн зураг: ' + s.id);
+                    s.photo = ghRaw(path);
+                }
+                try { localStorage.setItem('berkh_10b_students', JSON.stringify(students)); } catch (e) {}
+                const json = JSON.stringify({ updated: new Date().toISOString(), viewCodeHash, students }, null, 2);
+                await ghPut(GH.dataPath, utf8ToB64(json), 'Сурагчдын мэдээлэл шинэчлэв');
+                showToast('GitHub-д хадгалагдлаа ✓');
+                renderRoster();
+            } catch (e) {
+                showToast('GitHub-д хадгалах алдаа: ' + e.message);
+            } finally {
+                ghSaving = false;
+                if (ghAgain) { ghAgain = false; queueGithubSave(); }
+            }
+        }
+
+        function setupGithubToken() {
+            verifyTeacherPassword('GitHub холболт тохируулах', () => {
+                const t = prompt('GitHub fine-grained token оруулна уу (зөвхөн энэ репо, Contents: Read and write).\nУстгахын тулд хоосон үлдээгээд OK дарна уу.', '');
+                if (t === null) return;
+                if (t.trim()) {
+                    localStorage.setItem('berkh_10b_gh_token', t.trim());
+                    showToast('Token хадгалагдлаа');
+                    loadFromGitHub();
+                } else {
+                    localStorage.removeItem('berkh_10b_gh_token');
+                    showToast('Token устгагдлаа');
+                }
+            });
+        }
+
+        // Image Zoom Modal Functions
+        function openImageZoom(url, caption) {
+            const modal = document.getElementById('imageZoomModal');
+            const img = document.getElementById('zoomedImage');
+            const cap = document.getElementById('zoomedCaption');
+
+            img.src = url;
+            cap.innerText = caption || 'Сурагчийн зураг';
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeImageZoomModal(event) {
+            if (event && event.target && event.target.id !== 'imageZoomModal' && !event.target.closest('button')) {
+                return;
+            }
+            const modal = document.getElementById('imageZoomModal');
+            modal.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        function calculateAge(birthdateStr) {
+            if (!birthdateStr) return '-';
+            const birthDate = new Date(birthdateStr);
+            const today = new Date();
+            let age = today.getFullYear() - birthDate.getFullYear();
+            const monthDiff = today.getMonth() - birthDate.getMonth();
+            if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+            return age;
+        }
+
+        function setFilter(gender) {
+            currentFilter = gender;
+            
+            ['all', 'Male', 'Female'].forEach(type => {
+                const btn = document.getElementById(`filter${type}`);
+                if (type.toLowerCase() === gender.toLowerCase() || (type === 'all' && gender === 'all')) {
+                    btn.className = "px-3 py-1.5 rounded-lg bg-white text-berkh-red shadow-sm transition-all font-bold";
+                } else {
+                    btn.className = "px-3 py-1.5 rounded-lg hover:text-slate-900 transition-all font-semibold";
+                }
+            });
+
+            renderRoster();
+        }
+
+        function setViewMode(mode) {
+            currentViewMode = mode;
+            const gridContainer = document.getElementById('gridContainer');
+            const tableContainer = document.getElementById('tableContainer');
+            const gridBtn = document.getElementById('viewGridBtn');
+            const tableBtn = document.getElementById('viewTableBtn');
+
+            if (mode === 'grid') {
+                gridContainer.classList.remove('hidden');
+                tableContainer.classList.add('hidden');
+                gridBtn.className = "p-2 rounded-lg bg-white text-berkh-red shadow-sm";
+                tableBtn.className = "p-2 rounded-lg text-slate-500 hover:text-slate-800";
+            } else {
+                gridContainer.classList.add('hidden');
+                tableContainer.classList.remove('hidden');
+                tableBtn.className = "p-2 rounded-lg bg-white text-berkh-red shadow-sm";
+                gridBtn.className = "p-2 rounded-lg text-slate-500 hover:text-slate-800";
+            }
+        }
+
+        function filterStudents() {
+            renderRoster();
+        }
+
+        function renderRoster() {
+            const searchKeyword = document.getElementById('searchInput').value.trim().toLowerCase();
+            
+            const filtered = students.filter(s => {
+                const matchGender = (currentFilter === 'all') || (s.gender === currentFilter);
+                const fullName = `${s.lastName} ${s.firstName}`.toLowerCase();
+                const matchSearch = fullName.includes(searchKeyword);
+                return matchGender && matchSearch;
+            });
+
+            const maleCount = students.filter(s => s.gender === 'Эрэгтэй').length;
+            const femaleCount = students.filter(s => s.gender === 'Эмэгтэй').length;
+
+            document.getElementById('statTotal').innerText = students.length;
+            document.getElementById('statTotalCountHeader').innerText = `${students.length} сурагч`;
+            document.getElementById('statMale').innerText = maleCount;
+            document.getElementById('statFemale').innerText = femaleCount;
+
+            document.getElementById('countAll').innerText = students.length;
+            document.getElementById('countMale').innerText = maleCount;
+            document.getElementById('countFemale').innerText = femaleCount;
+
+            const emptyState = document.getElementById('emptyState');
+            if (filtered.length === 0) {
+                emptyState.classList.remove('hidden');
+                document.getElementById('gridContainer').innerHTML = '';
+                document.getElementById('tableBody').innerHTML = '';
+                return;
+            } else {
+                emptyState.classList.add('hidden');
+            }
+
+            // 1. Render Grid Cards
+            const gridContainer = document.getElementById('gridContainer');
+            gridContainer.innerHTML = filtered.map(student => {
+                const age = calculateAge(student.birthdate);
+                const genderBadgeColor = student.gender === 'Эрэгтэй' 
+                    ? 'bg-blue-500 text-white' 
+                    : 'bg-pink-500 text-white';
+                
+                const avatarUrl = student.photo || `https://placehold.co/400x500/134074/ffffff?text=${encodeURIComponent(student.firstName)}`;
+                const fullName = `${student.lastName} ${student.firstName}`;
+
+                return `
+                    <div class="bg-white rounded-3xl border border-slate-200/90 shadow-sm hover:shadow-xl transition-all duration-300 card-hover flex flex-col overflow-hidden group">
+                        
+                        <!-- Student Portrait Photo -->
+                        <div class="relative h-64 w-full bg-slate-100 overflow-hidden cursor-pointer" onclick="openImageZoom('${avatarUrl}', '${fullName}')">
+                            <img src="${avatarUrl}" alt="${student.firstName}" 
+                                class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500" 
+                                onerror="this.src='https://placehold.co/400x500/134074/ffffff?text=${encodeURIComponent(student.firstName)}'">
+                            
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-transparent to-black/20 opacity-90"></div>
+
+                            <div class="absolute top-3 left-3 flex items-center gap-1.5">
+                                <span class="px-2.5 py-1 rounded-full text-xs font-bold shadow-md flex items-center gap-1 ${genderBadgeColor}">
+                                    <i class="fa-solid ${student.gender === 'Эрэгтэй' ? 'fa-mars' : 'fa-venus'}"></i>
+                                    <span>${student.gender}</span>
+                                </span>
+                            </div>
+
+                            <div class="absolute top-3 right-3 flex items-center gap-1.5 bg-slate-900/60 backdrop-blur-md rounded-xl p-1 text-white opacity-90 group-hover:opacity-100 transition-opacity">
+                                <button onclick="event.stopPropagation(); protectedOpenDetailModal('${student.id}')" title="Дэлгэрэнгүй харах" class="w-8 h-8 rounded-lg hover:bg-white/20 flex items-center justify-center transition-all">
+                                    <i class="fa-solid fa-expand text-xs"></i>
+                                </button>
+                                <button onclick="event.stopPropagation(); protectedOpenEditModal('${student.id}')" title="Засах (Багш)" class="w-8 h-8 rounded-lg hover:bg-amber-500 flex items-center justify-center transition-all">
+                                    <i class="fa-solid fa-pen-to-square text-xs"></i>
+                                </button>
+                                <button onclick="event.stopPropagation(); protectedOpenDeleteModal('${student.id}')" title="Устгах (Багш)" class="w-8 h-8 rounded-lg hover:bg-red-600 flex items-center justify-center transition-all">
+                                    <i class="fa-solid fa-trash-can text-xs"></i>
+                                </button>
+                            </div>
+
+                            <div class="absolute bottom-3 left-4 right-4 text-white">
+                                <span class="text-[11px] font-semibold text-amber-300 tracking-wider uppercase block opacity-90">${student.lastName}</span>
+                                <h3 class="text-xl font-extrabold leading-tight text-white drop-shadow-sm">${student.firstName}</h3>
+                            </div>
+                        </div>
+
+                        <div class="p-4 flex flex-col justify-between flex-grow space-y-3 bg-white">
+                            <button onclick="protectedOpenDetailModal('${student.id}')" class="w-full py-2.5 bg-slate-100 hover:bg-berkh-navy hover:text-white text-berkh-navy font-bold text-xs rounded-xl transition-all flex items-center justify-center gap-2 border border-slate-200/80">
+                                <i class="fa-solid fa-address-card"></i>
+                                <span>Профайл харах</span>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            // 2. Render Table View
+            const tableBody = document.getElementById('tableBody');
+            tableBody.innerHTML = filtered.map(student => {
+                const avatarUrl = student.photo || `https://placehold.co/100x100/134074/ffffff?text=${encodeURIComponent(student.firstName)}`;
+                const fullName = `${student.lastName} ${student.firstName}`;
+                const genderBadge = student.gender === 'Эрэгтэй' 
+                    ? '<span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-50 text-blue-700 border border-blue-200"><i class="fa-solid fa-mars mr-1"></i>Эрэгтэй</span>' 
+                    : '<span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-pink-50 text-pink-700 border border-pink-200"><i class="fa-solid fa-venus mr-1"></i>Эмэгтэй</span>';
+
+                return `
+                    <tr class="hover:bg-slate-50/80 transition-colors">
+                        <td class="py-3.5 px-4 sm:px-6">
+                            <div class="flex items-center gap-3">
+                                <img src="${avatarUrl}" alt="${student.firstName}" class="w-10 h-10 rounded-xl object-cover cursor-pointer shadow-sm border border-slate-200" onclick="openImageZoom('${avatarUrl}', '${fullName}')">
+                                <div>
+                                    <div class="font-bold text-slate-900">${fullName}</div>
+                                    <div class="text-xs text-slate-400">${student.lastName}</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="py-3.5 px-4 font-medium text-slate-600">${genderBadge}</td>
+                        <td class="py-3.5 px-4 text-right">
+                            <div class="flex items-center justify-end gap-1">
+                                <button onclick="protectedOpenDetailModal('${student.id}')" title="Харах" class="p-2 text-slate-400 hover:text-berkh-navy hover:bg-slate-100 rounded-lg transition-all">
+                                    <i class="fa-solid fa-eye"></i>
+                                </button>
+                                <button onclick="protectedOpenEditModal('${student.id}')" title="Засах (Багш)" class="p-2 text-slate-400 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition-all">
+                                    <i class="fa-solid fa-pen"></i>
+                                </button>
+                                <button onclick="protectedOpenDeleteModal('${student.id}')" title="Устгах (Багш)" class="p-2 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-all">
+                                    <i class="fa-solid fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function openDetailModal(id) {
+            const student = students.find(s => s.id === id);
+            if (!student) return;
+
+            const avatarUrl = student.photo || `https://placehold.co/150x150/134074/ffffff?text=${encodeURIComponent(student.firstName)}`;
+            const age = calculateAge(student.birthdate);
+            const fullName = `${student.lastName} ${student.firstName}`;
+
+            const modalAvatar = document.getElementById('modalAvatar');
+            modalAvatar.src = avatarUrl;
+            modalAvatar.onclick = function() {
+                openImageZoom(avatarUrl, fullName);
+            };
+            modalAvatar.title = "Дэлгэцээр томруулж харах";
+            modalAvatar.className = "w-full h-full object-cover cursor-pointer hover:scale-105 transition-transform";
+
+            document.getElementById('modalFullName').innerText = `${student.lastName} овогтой ${student.firstName}`;
+            document.getElementById('modalLastName').innerText = student.lastName;
+            document.getElementById('modalFirstName').innerText = student.firstName;
+            document.getElementById('modalBirthdate').innerText = student.birthdate;
+            document.getElementById('modalAgeBadge').innerText = `${age} нас`;
+            document.getElementById('modalPhone').innerText = student.phone;
+            document.getElementById('modalPhoneCopyBtn').onclick = function() {
+                copyToClipboard(student.phone, this);
+            };
+            
+            // MOES Email
+            const email1Val = student.email || '-';
+            document.getElementById('modalEmail').innerText = email1Val;
+            document.getElementById('modalEmailCopyBtn').onclick = function() {
+                copyToClipboard(email1Val, this);
+            };
+
+            // Berkh Email
+            const email2Val = student.email2 || 'Байхгүй';
+            document.getElementById('modalEmail2').innerText = email2Val;
+            document.getElementById('modalEmail2CopyBtn').onclick = function() {
+                copyToClipboard(email2Val, this);
+            };
+
+            const genderBadge = document.getElementById('modalGenderBadge');
+            genderBadge.innerText = student.gender;
+            if (student.gender === 'Эрэгтэй') {
+                genderBadge.className = "inline-block px-2.5 py-0.5 rounded-full text-xs font-semibold bg-blue-500 text-white mb-1";
+            } else {
+                genderBadge.className = "inline-block px-2.5 py-0.5 rounded-full text-xs font-semibold bg-pink-500 text-white mb-1";
+            }
+
+            document.getElementById('modalEditBtn').onclick = function() {
+                closeDetailModal();
+                protectedOpenEditModal(student.id);
+            };
+
+            document.getElementById('detailModal').classList.remove('hidden');
+        }
+
+        function closeDetailModal() {
+            document.getElementById('detailModal').classList.add('hidden');
+        }
+
+        function openAddModal() {
+            document.getElementById('studentForm').reset();
+            document.getElementById('studentId').value = '';
+            document.getElementById('inputEmail2').value = '';
+            document.getElementById('formModalTitle').innerHTML = '<i class="fa-solid fa-user-plus text-amber-400"></i> Шинэ сурагч нэмэх';
+            document.getElementById('fileNameLabel').innerText = 'Файл сонгоогүй';
+            document.getElementById('formPhotoPreview').src = 'https://placehold.co/150x150/134074/ffffff?text=Зураг';
+            document.getElementById('formModal').classList.remove('hidden');
+        }
+
+        function openEditModal(id) {
+            const student = students.find(s => s.id === id);
+            if (!student) return;
+
+            document.getElementById('studentId').value = student.id;
+            document.getElementById('inputLastName').value = student.lastName;
+            document.getElementById('inputFirstName').value = student.firstName;
+            document.getElementById('inputGender').value = student.gender;
+            document.getElementById('inputBirthdate').value = student.birthdate;
+            document.getElementById('inputPhone').value = student.phone;
+            document.getElementById('inputEmail').value = student.email || '';
+            document.getElementById('inputEmail2').value = student.email2 || '';
+            document.getElementById('inputPhotoUrl').value = student.photo || '';
+            
+            const previewUrl = student.photo || `https://placehold.co/150x150/134074/ffffff?text=${encodeURIComponent(student.firstName)}`;
+            document.getElementById('formPhotoPreview').src = previewUrl;
+
+            document.getElementById('formModalTitle').innerHTML = '<i class="fa-solid fa-user-pen text-amber-400"></i> Сурагчийн мэдээлэл засах';
+            document.getElementById('formModal').classList.remove('hidden');
+        }
+
+        function closeFormModal() {
+            document.getElementById('formModal').classList.add('hidden');
+        }
+
+        function previewImageFromInput() {
+            const url = document.getElementById('inputPhotoUrl').value;
+            if (url) {
+                document.getElementById('formPhotoPreview').src = url;
+            }
+        }
+
+        function openCropModal(imageSrc) {
+            const modal = document.getElementById('cropModal');
+            const image = document.getElementById('cropImage');
+            
+            selectedCropBgColor = '#ffffff';
+            const cropBgInput = document.getElementById('cropBgColor');
+            if (cropBgInput) {
+                cropBgInput.value = selectedCropBgColor;
+            }
+
+            image.src = imageSrc;
+            modal.classList.remove('hidden');
+
+            if (cropper) {
+                cropper.destroy();
+            }
+
+            cropper = new Cropper(image, {
+                aspectRatio: 1,
+                viewMode: 0,
+                autoCropArea: 0.8,
+                responsive: true,
+                background: true,
+                zoomable: true,
+                scalable: true
+            });
+        }
+
+        function closeCropModal() {
+            const modal = document.getElementById('cropModal');
+            modal.classList.add('hidden');
+            if (cropper) {
+                cropper.destroy();
+                cropper = null;
+            }
+        }
+
+        function cropperZoom(ratio) {
+            if (cropper) cropper.zoom(ratio);
+        }
+
+        function cropperRotate(degree) {
+            if (cropper) cropper.rotate(degree);
+        }
+
+        function cropperReset() {
+            if (cropper) cropper.reset();
+        }
+
+        function applyCrop() {
+            if (!cropper) return;
+            
+            const cropBgInput = document.getElementById('cropBgColor');
+            if (cropBgInput && selectedCropBgColor !== 'transparent') {
+                selectedCropBgColor = cropBgInput.value;
+            }
+
+            const canvasOptions = {
+                width: 300,
+                height: 300,
+                imageSmoothingEnabled: true,
+                imageSmoothingQuality: 'high',
+            };
+
+            const isTransparent = selectedCropBgColor === 'transparent';
+            if (!isTransparent) {
+                canvasOptions.fillColor = selectedCropBgColor;
+            }
+
+            const canvas = cropper.getCroppedCanvas(canvasOptions);
+            
+            if (canvas) {
+                const croppedDataUrl = canvas.toDataURL('image/png');
+                if (currentCropTarget === 'logo') {
+                    tempLogoUrl = croppedDataUrl;
+                    const display = document.getElementById('logoModalDisplay');
+                    if (display) display.innerHTML = `<img src="${croppedDataUrl}" class="w-full h-full object-contain">`;
+                    const inputUrl = document.getElementById('inputLogoUrl');
+                    if (inputUrl) inputUrl.value = croppedDataUrl;
+                } else {
+                    document.getElementById('inputPhotoUrl').value = croppedDataUrl;
+                    document.getElementById('formPhotoPreview').src = croppedDataUrl;
+                }
+            }
+            closeCropModal();
+        }
+
+        let tempLogoUrl = null;
+        let tempLogoBg = '#ffffff';
+
+        function openLogoModal() {
+            const savedLogo = localStorage.getItem('berkh_10b_school_logo');
+            const savedBgColor = localStorage.getItem('berkh_10b_school_logo_bg') || '#ffffff';
+            
+            tempLogoUrl = savedLogo || null;
+            tempLogoBg = savedBgColor;
+
+            const logoBox = document.getElementById('logoPreviewBox');
+            const logoDisplay = document.getElementById('logoModalDisplay');
+            const bgInput = document.getElementById('inputLogoBgColor');
+            const urlInput = document.getElementById('inputLogoUrl');
+
+            if (bgInput) bgInput.value = tempLogoBg;
+            if (logoBox) logoBox.style.backgroundColor = tempLogoBg;
+            if (urlInput) urlInput.value = savedLogo || '';
+
+            if (savedLogo) {
+                logoDisplay.innerHTML = `<img src="${savedLogo}" class="w-full h-full object-contain">`;
+            } else {
+                logoDisplay.innerHTML = DEFAULT_LOGO_SVG;
+            }
+
+            document.getElementById('logoFileNameLabel').innerText = 'Файл сонгоогүй';
+            document.getElementById('logoModal').classList.remove('hidden');
+        }
+
+        function closeLogoModal() {
+            document.getElementById('logoModal').classList.add('hidden');
+        }
+
+        function previewLogoFromUrl() {
+            const url = document.getElementById('inputLogoUrl').value.trim();
+            const logoDisplay = document.getElementById('logoModalDisplay');
+            if (url) {
+                tempLogoUrl = url;
+                logoDisplay.innerHTML = `<img src="${url}" class="w-full h-full object-contain" onerror="this.onerror=null; this.parentElement.innerHTML=DEFAULT_LOGO_SVG;">`;
+            } else {
+                tempLogoUrl = null;
+                logoDisplay.innerHTML = DEFAULT_LOGO_SVG;
+            }
+        }
+
+        function updateLogoPreviewBg(color) {
+            tempLogoBg = color;
+            const logoBox = document.getElementById('logoPreviewBox');
+            if (logoBox) logoBox.style.backgroundColor = color;
+        }
+
+        function handleLogoFileSelect(event) {
+            currentCropTarget = 'logo';
+            const file = event.target.files[0];
+            if (file) {
+                document.getElementById('logoFileNameLabel').innerText = file.name;
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    openCropModal(e.target.result);
+                };
+                reader.readAsDataURL(file);
+                event.target.value = '';
+            }
+        }
+
+        function saveSchoolLogo() {
+            if (tempLogoUrl) {
+                localStorage.setItem('berkh_10b_school_logo', tempLogoUrl);
+            } else {
+                localStorage.removeItem('berkh_10b_school_logo');
+            }
+            localStorage.setItem('berkh_10b_school_logo_bg', tempLogoBg);
+            
+            renderSchoolLogo();
+            closeLogoModal();
+        }
+
+        function resetSchoolLogo() {
+            localStorage.removeItem('berkh_10b_school_logo');
+            localStorage.setItem('berkh_10b_school_logo_bg', '#ffffff');
+            renderSchoolLogo();
+            closeLogoModal();
+        }
+
+        function handleFileSelect(event) {
+            currentCropTarget = 'student';
+            const file = event.target.files[0];
+            if (file) {
+                document.getElementById('fileNameLabel').innerText = file.name;
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    openCropModal(e.target.result);
+                };
+                reader.readAsDataURL(file);
+                event.target.value = '';
+            }
+        }
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            
+            const id = document.getElementById('studentId').value;
+            const lastName = document.getElementById('inputLastName').value.trim();
+            const firstName = document.getElementById('inputFirstName').value.trim();
+            const gender = document.getElementById('inputGender').value;
+            const birthdate = document.getElementById('inputBirthdate').value;
+            const phone = document.getElementById('inputPhone').value.trim();
+            const email = document.getElementById('inputEmail').value.trim();
+            const email2 = document.getElementById('inputEmail2').value.trim();
+            let photo = document.getElementById('inputPhotoUrl').value.trim();
+
+            if (!photo) {
+                photo = `https://placehold.co/150x150/134074/ffffff?text=${encodeURIComponent(firstName)}`;
+            }
+
+            if (id) {
+                const index = students.findIndex(s => s.id === id);
+                if (index !== -1) {
+                    students[index] = { id, lastName, firstName, gender, birthdate, phone, email, email2, photo };
+                }
+            } else {
+                const newStudent = {
+                    id: Date.now().toString(),
+                    lastName,
+                    firstName,
+                    gender,
+                    birthdate,
+                    phone,
+                    email,
+                    email2,
+                    photo
+                };
+                students.unshift(newStudent);
+            }
+
+            saveToLocalStorage();
+            renderRoster();
+            closeFormModal();
+        }
+
+        function openDeleteModal(id) {
+            const student = students.find(s => s.id === id);
+            if (!student) return;
+
+            pendingDeleteId = id;
+            document.getElementById('deleteStudentName').innerText = `${student.lastName} ${student.firstName}`;
+            document.getElementById('confirmDeleteBtn').onclick = function() {
+                deleteStudent(pendingDeleteId);
+            };
+            document.getElementById('deleteModal').classList.remove('hidden');
+        }
+
+        function closeDeleteModal() {
+            pendingDeleteId = null;
+            document.getElementById('deleteModal').classList.add('hidden');
+        }
+
+        function deleteStudent(id) {
+            students = students.filter(s => s.id !== id);
+            saveToLocalStorage();
+            renderRoster();
+            closeDeleteModal();
+        }
+
+        let pendingAuthCallback = null;
+        let pendingAuthMode = 'teacher';
+
+        function verifyViewPassword(actionTitle, callback) { verifyTeacherPassword(actionTitle, callback, 'view'); }
+        function verifyTeacherPassword(actionTitle, callback, mode = 'teacher') {
+            pendingAuthMode = mode;
+            document.getElementById('passwordModalLabel').innerText = mode === 'view' ? 'Профайл үзэх нууц код' : 'Багшийн нууц үг';
+            pendingAuthCallback = callback;
+            document.getElementById('passwordActionTitle').innerText = actionTitle;
+            document.getElementById('inputAuthPassword').value = '';
+            document.getElementById('passwordErrorMsg').classList.add('hidden');
+            document.getElementById('passwordModal').classList.remove('hidden');
+            setTimeout(() => {
+                const input = document.getElementById('inputAuthPassword');
+                if (input) input.focus();
+            }, 100);
+        }
+
+        function closePasswordModal() {
+            document.getElementById('passwordModal').classList.add('hidden');
+            pendingAuthCallback = null;
+        }
+
+        async function handlePasswordAuthSubmit(e) {
+            e.preventDefault();
+            const inputPass = document.getElementById('inputAuthPassword').value;
+            let ok = inputPass === getTeacherPassword();
+            if (!ok && pendingAuthMode === 'view') ok = (await sha256(inputPass)) === (await getViewHash());
+
+            if (ok) {
+                const callback = pendingAuthCallback;
+                closePasswordModal();
+                if (typeof callback === 'function') {
+                    callback();
+                }
+            } else {
+                const errEl = document.getElementById('passwordErrorMsg');
+                errEl.innerText = 'Нууц үг буруу байна!';
+                errEl.classList.remove('hidden');
+            }
+        }
+
+        function openChangePasswordModal() {
+            verifyTeacherPassword('Багшийн нууц үг солих', () => {
+                document.getElementById('changePasswordForm').reset();
+                document.getElementById('changePasswordErrorMsg').classList.add('hidden');
+                document.getElementById('changePasswordModal').classList.remove('hidden');
+            });
+        }
+
+        function closeChangePasswordModal() {
+            document.getElementById('changePasswordModal').classList.add('hidden');
+        }
+
+        function handleChangePasswordSubmit(e) {
+            e.preventDefault();
+            const currentPass = getTeacherPassword();
+            const inputCurrent = document.getElementById('inputCurrentPassword').value;
+            const inputNew = document.getElementById('inputNewPassword').value;
+            const inputConfirm = document.getElementById('inputConfirmPassword').value;
+            const errEl = document.getElementById('changePasswordErrorMsg');
+
+            if (inputCurrent !== currentPass) {
+                errEl.innerText = 'Одоогийн нууц үг буруу байна!';
+                errEl.classList.remove('hidden');
+                return;
+            }
+
+            if (inputNew !== inputConfirm) {
+                errEl.innerText = 'Шинэ нууц үг хоорондоо таарахгүй байна!';
+                errEl.classList.remove('hidden');
+                return;
+            }
+
+            try {
+                localStorage.setItem('berkh_10b_teacher_password', inputNew);
+                closeChangePasswordModal();
+                showToast('Багшийн нууц үг амжилттай шинэчлэгдлээ!');
+            } catch (err) {
+                errEl.innerText = 'Хадгалахад алдаа гарлаа. Хөтчийн тохиргоог шалгана уу.';
+                errEl.classList.remove('hidden');
+            }
+        }
+
+        // ===== Профайл үзэх нууц код =====
+        const DEFAULT_VIEW_CODE = '1234';
+        let viewCodeHash = localStorage.getItem('berkh_10b_view_hash') || null;
+        async function sha256(s) {
+            const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(s));
+            return [...new Uint8Array(b)].map(x => x.toString(16).padStart(2, '0')).join('');
+        }
+        async function getViewHash() { return viewCodeHash || sha256(DEFAULT_VIEW_CODE); }
+        function protectedOpenDetailModal(id) {
+            verifyViewPassword('Сурагчийн профайл харах', () => openDetailModal(id));
+        }
+        function openViewCodeModal() {
+            verifyTeacherPassword('Профайл үзэх нууц код солих', () => {
+                document.getElementById('viewCodeForm').reset();
+                document.getElementById('viewCodeErrorMsg').classList.add('hidden');
+                document.getElementById('viewCodeModal').classList.remove('hidden');
+            });
+        }
+        function closeViewCodeModal() { document.getElementById('viewCodeModal').classList.add('hidden'); }
+        async function handleViewCodeSubmit(e) {
+            e.preventDefault();
+            const n = document.getElementById('inputNewViewCode').value;
+            const c = document.getElementById('inputConfirmViewCode').value;
+            const err = document.getElementById('viewCodeErrorMsg');
+            if (n !== c) { err.innerText = 'Кодууд хоорондоо таарахгүй байна!'; err.classList.remove('hidden'); return; }
+            viewCodeHash = await sha256(n);
+            try { localStorage.setItem('berkh_10b_view_hash', viewCodeHash); } catch (x) {}
+            queueGithubSave();
+            closeViewCodeModal();
+            showToast('Профайл үзэх код шинэчлэгдлээ!');
+        }
+
+        function protectedOpenAddModal() {
+            verifyTeacherPassword('Шинэ сурагч нэмэх', openAddModal);
+        }
+
+        function protectedOpenEditModal(id) {
+            verifyTeacherPassword('Сурагчийн мэдээлэл засах', () => openEditModal(id));
+        }
+
+        function protectedOpenDeleteModal(id) {
+            verifyTeacherPassword('Сурагч устгах', () => openDeleteModal(id));
+        }
+
+        function protectedOpenLogoModal() {
+            verifyTeacherPassword('Сургуулийн лого солих', openLogoModal);
+        }
+    </script>
+</body>
+</html>
