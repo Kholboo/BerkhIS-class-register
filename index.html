@@ -914,8 +914,8 @@
         }
 
         async function pushToGitHub() {
-            if (!ghToken()) return showToast('GitHub token тохируулаагүй. Зөвхөн энэ төхөөрөмжид хадгаллаа (☁ товч).');
-            if (ghSaving) { ghAgain = true; return; }
+            if (!ghToken()) { showToast('GitHub token тохируулаагүй. Зөвхөн энэ төхөөрөмжид хадгаллаа (☁ товч).'); return false; }
+            while (ghSaving) await new Promise(r => setTimeout(r, 200));
             ghSaving = true;
             try {
                 // Шинэ зургуудыг тусдаа файл болгон репо руу оруулна
@@ -931,8 +931,10 @@
                 await ghPut(GH.dataPath, utf8ToB64(json), 'Сурагчдын мэдээлэл шинэчлэв');
                 showToast('GitHub-д хадгалагдлаа ✓');
                 renderRoster();
+                return true;
             } catch (e) {
                 showToast('GitHub-д хадгалах алдаа: ' + e.message);
+                return false;
             } finally {
                 ghSaving = false;
                 if (ghAgain) { ghAgain = false; queueGithubSave(); }
@@ -1586,9 +1588,11 @@
                 teacherHash = await sha256(inputNew);
                 localStorage.setItem('berkh_10b_teacher_hash', teacherHash);
                 localStorage.removeItem('berkh_10b_teacher_password');
-                queueGithubSave();
+                clearTimeout(ghTimer);
                 closeChangePasswordModal();
-                showToast('Багшийн нууц үг амжилттай шинэчлэгдлээ!');
+                const saved = await pushToGitHub();
+                showToast(saved ? 'Багшийн нууц үг GitHub-д хадгалагдлаа ✓'
+                                : 'Нууц үг зөвхөн энэ хөтөч дээр солигдлоо. GitHub-д хадгалагдсангүй!');
             } catch (err) {
                 errEl.innerText = 'Хадгалахад алдаа гарлаа. Хөтчийн тохиргоог шалгана уу.';
                 errEl.classList.remove('hidden');
@@ -1643,9 +1647,11 @@
             if (n !== c) { err.innerText = 'Кодууд хоорондоо таарахгүй байна!'; err.classList.remove('hidden'); return; }
             viewCodeHash = await sha256(n);
             try { localStorage.setItem('berkh_10b_view_hash', viewCodeHash); } catch (x) {}
-            queueGithubSave();
+            clearTimeout(ghTimer);
             closeViewCodeModal();
-            showToast('Профайл үзэх код шинэчлэгдлээ!');
+            const saved = await pushToGitHub();
+            showToast(saved ? 'Профайл үзэх код GitHub-д хадгалагдлаа ✓'
+                            : 'Код зөвхөн энэ хөтөч дээр солигдлоо. GitHub-д хадгалагдсангүй!');
         }
 
         function protectedOpenAddModal() {
