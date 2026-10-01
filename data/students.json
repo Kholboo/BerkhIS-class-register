@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-01T00:59:39.093Z",
+  "updated": "2026-10-01T01:01:19.348Z",
   "teacherHash": "e53d82b92268dc0e7cbf0da886b81f665a6c1bcde864d7fe46caa68f618ea6e9",
   "viewCodeHash": "1ade942a8448f36f19ea477cb578d43ed34541d7599fb2218a287bb785706b1b",
   "students": [
@@ -280,14 +280,14 @@
     },
     {
       "id": "26",
-      "lastName": "Нэргүй",
-      "firstName": "Нандин-Эрдэнэ",
-      "gender": "Эмэгтэй",
-      "birthdate": "2009-05-15",
-      "phone": "99779911",
-      "email": "nandinerdene.n@moes.edu.mn",
+      "lastName": "Төмөрхуяг",
+      "firstName": "Эзэнхүү",
+      "gender": "Эрэгтэй",
+      "birthdate": "2011-05-17",
+      "phone": "94666763",
+      "email": "ezenkhuu373g@moes.edu.mn",
       "email2": "nandinerdene.n@berkh.edu.mn",
-      "photo": "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=400&auto=format&fit=crop&q=80"
+      "photo": "https://raw.githubusercontent.com/kholboo/BerkhIS-class-register/main/data/photos/26-1790816475315.png"
     }
   ]
 }
