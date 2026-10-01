@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-01T00:31:29.566Z",
+  "updated": "2026-10-01T00:33:29.617Z",
   "teacherHash": "e53d82b92268dc0e7cbf0da886b81f665a6c1bcde864d7fe46caa68f618ea6e9",
   "viewCodeHash": "1ade942a8448f36f19ea477cb578d43ed34541d7599fb2218a287bb785706b1b",
   "students": [
@@ -126,14 +126,14 @@
     },
     {
       "id": "12",
-      "lastName": "Жаргалсайхан",
-      "firstName": "Сарнай",
-      "gender": "Эмэгтэй",
-      "birthdate": "2009-10-17",
-      "phone": "99334455",
-      "email": "sarnai.j@moes.edu.mn",
-      "email2": "sarnai.j@berkh.edu.mn",
-      "photo": "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=400&auto=format&fit=crop&q=80"
+      "lastName": "Гансүх",
+      "firstName": "Дөлгөөн",
+      "gender": "Эрэгтэй",
+      "birthdate": "2011-04-08",
+      "phone": "94882355",
+      "email": "dulguun1klm@moes.edu.mn",
+      "email2": "dulguun@berkh.edu.mn",
+      "photo": "https://raw.githubusercontent.com/kholboo/BerkhIS-class-register/main/data/photos/12-1790814806275.png"
     },
     {
       "id": "13",
