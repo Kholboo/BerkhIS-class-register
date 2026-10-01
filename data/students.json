@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-01T00:18:07.662Z",
+  "updated": "2026-10-01T00:20:17.954Z",
   "teacherHash": "e53d82b92268dc0e7cbf0da886b81f665a6c1bcde864d7fe46caa68f618ea6e9",
   "viewCodeHash": "1ade942a8448f36f19ea477cb578d43ed34541d7599fb2218a287bb785706b1b",
   "students": [
@@ -93,14 +93,14 @@
     },
     {
       "id": "9",
-      "lastName": "Лхагвасүрэн",
-      "firstName": "Мөнх-Оргил",
+      "lastName": "Баярмагнай",
+      "firstName": "Булган",
       "gender": "Эрэгтэй",
-      "birthdate": "2009-02-28",
-      "phone": "99000112",
-      "email": "munkhorgil.l@moes.edu.mn",
-      "email2": "munkhorgil.l@berkh.edu.mn",
-      "photo": "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=400&auto=format&fit=crop&q=80"
+      "birthdate": "2011-09-07",
+      "phone": "99740371",
+      "email": "bulgan8og2@moes.edu.mn",
+      "email2": "bulgan2029@berkh.edu.mn",
+      "photo": "https://raw.githubusercontent.com/kholboo/BerkhIS-class-register/main/data/photos/9-1790814015202.png"
     },
     {
       "id": "10",
