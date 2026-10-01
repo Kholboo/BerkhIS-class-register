@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <!-- Google Fonts Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -98,10 +99,16 @@
                             <p id="statTotalCountHeader" class="text-base font-bold text-white">0 сурагч</p>
                         </div>
                     </div>
+                    <div class="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
+                    <button onclick="protectedExportExcel()" class="w-full sm:w-auto bg-white/10 hover:bg-white/20 text-white font-bold px-5 py-2.5 rounded-xl text-sm shadow-lg transition-all duration-200 flex items-center justify-center gap-2 border border-white/30">
+                        <i class="fa-solid fa-file-excel text-sm"></i>
+                        <span>Excel татах</span>
+                    </button>
                     <button onclick="protectedOpenAddModal()" class="w-full sm:w-auto bg-berkh-gold hover:bg-amber-400 text-berkh-crimson font-bold px-5 py-2.5 rounded-xl text-sm shadow-lg transition-all duration-200 flex items-center justify-center gap-2 border border-amber-300/50">
                         <i class="fa-solid fa-user-plus text-sm"></i>
                         <span>Сурагч нэмэх</span>
                     </button>
+                    </div>
                 </div>
 
             </div>
@@ -689,7 +696,7 @@
                 <span class="text-white font-semibold">Бэрх Олон Улсын Сургууль (Berkh International School)</span>
             </div>
             <div class="flex items-center gap-2">
-                <p>© 2026 10Б Ангийн веб сайт. Бүх эрх хуулиар хамгаалагдсан. <span class="opacity-50">v2026.10.01-c</span></p>
+                <p>© 2026 10Б Ангийн веб сайт. Бүх эрх хуулиар хамгаалагдсан. <span class="opacity-50">v2026.10.01-d</span></p>
                 <button onclick="openViewCodeModal()" class="opacity-25 hover:opacity-100 transition-opacity text-pink-200 hover:text-amber-300 p-1 ml-1" title="Профайл үзэх код солих (Багш)">
                     <i class="fa-solid fa-user-lock text-xs"></i>
                 </button>
@@ -1663,6 +1670,33 @@
             const saved = await pushToGitHub();
             showToast(saved ? 'Профайл үзэх код GitHub-д хадгалагдлаа ✓'
                             : 'Код зөвхөн энэ хөтөч дээр солигдлоо. GitHub-д хадгалагдсангүй!');
+        }
+
+        // ===== Excel экспорт =====
+        function protectedExportExcel() {
+            verifyTeacherPassword('Сурагчдын мэдээллийг Excel-ээр татах', exportToExcel);
+        }
+        function exportToExcel() {
+            if (typeof XLSX === 'undefined') return showToast('Excel сан ачаалагдсангүй. Интернэт холболтоо шалгана уу.');
+            if (!students.length) return showToast('Экспортлох сурагч алга.');
+            const rows = students.map((s, i) => ({
+                '№': i + 1,
+                'Овог': s.lastName || '',
+                'Нэр': s.firstName || '',
+                'Хүйс': s.gender || '',
+                'Төрсөн огноо': s.birthdate || '',
+                'Нас': calculateAge(s.birthdate),
+                'Утасны дугаар': String(s.phone || ''),
+                'MOES имэйл': s.email || '',
+                'Berkh имэйл': s.email2 || '',
+                'Зургийн холбоос': /^https?:/.test(s.photo || '') ? s.photo : ''
+            }));
+            const ws = XLSX.utils.json_to_sheet(rows);
+            ws['!cols'] = [6, 18, 18, 10, 14, 6, 15, 30, 30, 40].map(w => ({ wch: w }));
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, '10Б анги');
+            XLSX.writeFile(wb, 'Berkh_10B_surgachid_' + new Date().toISOString().slice(0, 10) + '.xlsx');
+            showToast('Excel файл татагдлаа ✓');
         }
 
         function protectedOpenAddModal() {
