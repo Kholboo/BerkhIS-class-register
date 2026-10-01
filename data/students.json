@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-01T00:29:31.734Z",
+  "updated": "2026-10-01T00:31:00.678Z",
   "teacherHash": "e53d82b92268dc0e7cbf0da886b81f665a6c1bcde864d7fe46caa68f618ea6e9",
   "viewCodeHash": "1ade942a8448f36f19ea477cb578d43ed34541d7599fb2218a287bb785706b1b",
   "students": [
@@ -115,14 +115,14 @@
     },
     {
       "id": "11",
-      "lastName": "Даваажав",
-      "firstName": "Ирмүүн",
-      "gender": "Эрэгтэй",
-      "birthdate": "2009-06-25",
+      "lastName": "Энхтайван",
+      "firstName": "Гэгээлэн",
+      "gender": "Эмэгтэй",
+      "birthdate": "2010-11-10",
       "phone": "99223344",
-      "email": "irmuun.d@moes.edu.mn",
-      "email2": "irmuun.d@berkh.edu.mn",
-      "photo": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&auto=format&fit=crop&q=80"
+      "email": "gegeelen5439@moes.edu.mn",
+      "email2": "gegeelen2029@berkh.edu.mn",
+      "photo": "https://raw.githubusercontent.com/kholboo/BerkhIS-class-register/main/data/photos/11-1790814657235.png"
     },
     {
       "id": "12",
