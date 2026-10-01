@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-01T00:49:40.111Z",
+  "updated": "2026-10-01T00:50:55.709Z",
   "teacherHash": "e53d82b92268dc0e7cbf0da886b81f665a6c1bcde864d7fe46caa68f618ea6e9",
   "viewCodeHash": "1ade942a8448f36f19ea477cb578d43ed34541d7599fb2218a287bb785706b1b",
   "students": [
@@ -214,14 +214,14 @@
     },
     {
       "id": "20",
-      "lastName": "Дашдорж",
-      "firstName": "Төгс-Эрдэнэ",
+      "lastName": "Мөнхтуяа",
+      "firstName": "Сугармаа",
       "gender": "Эмэгтэй",
-      "birthdate": "2009-10-31",
-      "phone": "99113355",
-      "email": "tugserdene.d@moes.edu.mn",
-      "email2": "tugserdene.d@berkh.edu.mn",
-      "photo": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=400&auto=format&fit=crop&q=80"
+      "birthdate": "2011-07-01",
+      "phone": "96552443",
+      "email": "sugarmaa33lr@moes.edu.mn",
+      "email2": "sugarmaa2029@berkh.edu.mn",
+      "photo": "https://raw.githubusercontent.com/kholboo/BerkhIS-class-register/main/data/photos/20-1790815851328.png"
     },
     {
       "id": "21",
