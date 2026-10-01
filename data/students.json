@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-01T00:22:16.187Z",
+  "updated": "2026-10-01T00:24:15.846Z",
   "teacherHash": "e53d82b92268dc0e7cbf0da886b81f665a6c1bcde864d7fe46caa68f618ea6e9",
   "viewCodeHash": "1ade942a8448f36f19ea477cb578d43ed34541d7599fb2218a287bb785706b1b",
   "students": [
@@ -104,14 +104,14 @@
     },
     {
       "id": "10",
-      "lastName": "Пүрэвдорж",
-      "firstName": "Мишээл",
-      "gender": "Эмэгтэй",
-      "birthdate": "2009-09-09",
+      "lastName": "Мөнхбат",
+      "firstName": "Ган-Очир",
+      "gender": "Эрэгтэй",
+      "birthdate": "2011-02-10",
       "phone": "99112233",
-      "email": "misheel.p@moes.edu.mn",
-      "email2": "misheel.p@berkh.edu.mn",
-      "photo": "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&auto=format&fit=crop&q=80"
+      "email": "gan-ochir3zwl@moes.edu.mn",
+      "email2": "gan-ochir@berkh.edu.mn",
+      "photo": "https://raw.githubusercontent.com/kholboo/BerkhIS-class-register/main/data/photos/10-1790814252972.png"
     },
     {
       "id": "11",
