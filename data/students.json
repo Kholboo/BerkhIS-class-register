@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-01T00:04:51.160Z",
+  "updated": "2026-10-01T00:06:47.801Z",
   "teacherHash": "e53d82b92268dc0e7cbf0da886b81f665a6c1bcde864d7fe46caa68f618ea6e9",
   "viewCodeHash": "1ade942a8448f36f19ea477cb578d43ed34541d7599fb2218a287bb785706b1b",
   "students": [
@@ -38,14 +38,14 @@
     },
     {
       "id": "4",
-      "lastName": "Дорж",
-      "firstName": "Номин",
-      "gender": "Эмэгтэй",
-      "birthdate": "2009-11-05",
-      "phone": "99444567",
-      "email": "nomin.d@moes.edu.mn",
-      "email2": "nomin.d@berkh.edu.mn",
-      "photo": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400&auto=format&fit=crop&q=80"
+      "lastName": "Ариунбаатар",
+      "firstName": "Ариун-Эрдэнэ",
+      "gender": "Эрэгтэй",
+      "birthdate": "2011-02-23",
+      "phone": "88951727",
+      "email": "ariun-erdene23sx@moes.edu.mn",
+      "email2": "ariun-erdene2029@berkh.edu.mn",
+      "photo": "https://raw.githubusercontent.com/kholboo/BerkhIS-class-register/main/data/photos/4-1790813204654.png"
     },
     {
       "id": "5",
