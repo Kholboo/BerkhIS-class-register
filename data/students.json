@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-01T00:25:10.502Z",
+  "updated": "2026-10-01T00:29:31.734Z",
   "teacherHash": "e53d82b92268dc0e7cbf0da886b81f665a6c1bcde864d7fe46caa68f618ea6e9",
   "viewCodeHash": "1ade942a8448f36f19ea477cb578d43ed34541d7599fb2218a287bb785706b1b",
   "students": [
@@ -108,7 +108,7 @@
       "firstName": "Ган-Очир",
       "gender": "Эрэгтэй",
       "birthdate": "2011-02-10",
-      "phone": "99112233",
+      "phone": "86310889",
       "email": "gan-ochir3zwl@moes.edu.mn",
       "email2": "gan-ochir@berkh.edu.mn",
       "photo": "https://raw.githubusercontent.com/kholboo/BerkhIS-class-register/main/data/photos/10-1790814306495.png"
