@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-01T00:17:13.057Z",
+  "updated": "2026-10-01T00:18:07.662Z",
   "teacherHash": "e53d82b92268dc0e7cbf0da886b81f665a6c1bcde864d7fe46caa68f618ea6e9",
   "viewCodeHash": "1ade942a8448f36f19ea477cb578d43ed34541d7599fb2218a287bb785706b1b",
   "students": [
@@ -82,14 +82,14 @@
     },
     {
       "id": "8",
-      "lastName": "Мөнх-Эрдэнэ",
-      "firstName": "Энхжин",
-      "gender": "Эмэгтэй",
+      "lastName": "Бат-Эрдэнэ",
+      "firstName": "Билэгжаргал",
+      "gender": "Эрэгтэй",
       "birthdate": "2009-12-14",
       "phone": "99888901",
-      "email": "enkhjin.m@moes.edu.mn",
-      "email2": "enkhjin.m@berkh.edu.mn",
-      "photo": "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=400&auto=format&fit=crop&q=80"
+      "email": "bilegjargal4ks5@moes.edu.mn",
+      "email2": "bilegjargal@berkh.edu.mn",
+      "photo": "https://raw.githubusercontent.com/kholboo/BerkhIS-class-register/main/data/photos/8-1790813884331.png"
     },
     {
       "id": "9",
