@@ -1,19 +1,8 @@
 {
-  "updated": "2026-10-01T01:06:19.310Z",
+  "updated": "2026-10-01T01:08:06.181Z",
   "teacherHash": "e53d82b92268dc0e7cbf0da886b81f665a6c1bcde864d7fe46caa68f618ea6e9",
   "viewCodeHash": "1ade942a8448f36f19ea477cb578d43ed34541d7599fb2218a287bb785706b1b",
   "students": [
-    {
-      "id": "1790816731585",
-      "lastName": "Очирсүрэн",
-      "firstName": "Батхолбоо",
-      "gender": "Эрэгтэй",
-      "birthdate": "1984-02-25",
-      "phone": "94022340",
-      "email": "batkholboo0usfg@moes.edu.mn",
-      "email2": "batkholboo@berkh.edu.mn",
-      "photo": "https://raw.githubusercontent.com/kholboo/BerkhIS-class-register/main/data/photos/1790816731585-1790816775995.png"
-    },
     {
       "id": "1",
       "lastName": "Буянжаргал",
