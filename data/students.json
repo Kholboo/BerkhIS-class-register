@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-01T00:40:11.088Z",
+  "updated": "2026-10-01T00:41:36.289Z",
   "teacherHash": "e53d82b92268dc0e7cbf0da886b81f665a6c1bcde864d7fe46caa68f618ea6e9",
   "viewCodeHash": "1ade942a8448f36f19ea477cb578d43ed34541d7599fb2218a287bb785706b1b",
   "students": [
@@ -159,13 +159,13 @@
     },
     {
       "id": "15",
-      "lastName": "Отгонбаатар",
-      "firstName": "Төгөлдөр",
-      "gender": "Эрэгтэй",
-      "birthdate": "2009-07-11",
-      "phone": "99667788",
-      "email": "tuguldur.o@moes.edu.mn",
-      "email2": "tuguldur.o@berkh.edu.mn",
+      "lastName": "Жамсран",
+      "firstName": "Номин-Эрдэнэ",
+      "gender": "Эмэгтэй",
+      "birthdate": "2010-12-18",
+      "phone": "90741218",
+      "email": "nomin-erdene6kc5@moes.edu.mn",
+      "email2": "nomin-erdene2029@berkh.edu.mn",
       "photo": "https://images.unsplash.com/photo-1463453091185-61582044d556?w=400&auto=format&fit=crop&q=80"
     },
     {
