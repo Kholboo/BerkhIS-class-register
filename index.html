@@ -696,7 +696,7 @@
                 <span class="text-white font-semibold">Бэрх Олон Улсын Сургууль (Berkh International School)</span>
             </div>
             <div class="flex items-center gap-2">
-                <p>© 2026 10Б Ангийн веб сайт. Бүх эрх хуулиар хамгаалагдсан. <span class="opacity-50">v2026.10.01-e</span></p>
+                <p>© 2026 10Б Ангийн веб сайт. Бүх эрх хуулиар хамгаалагдсан. <span class="opacity-50">v2026.10.01-f</span></p>
                 <button onclick="openViewCodeModal()" class="opacity-25 hover:opacity-100 transition-opacity text-pink-200 hover:text-amber-300 p-1 ml-1" title="Профайл үзэх код солих (Багш)">
                     <i class="fa-solid fa-user-lock text-xs"></i>
                 </button>
@@ -1009,8 +1009,8 @@
             const map = { all: 'all', 'Эрэгтэй': 'Male', 'Эмэгтэй': 'Female' };
             const active = map[gender];
             ['all', 'Male', 'Female'].forEach(type => {
-                const btn = document.getElementById(`filter${type}`);
-                btn.className = type === active
+                const btn = document.getElementById('filter' + (type === 'all' ? 'All' : type));
+                if (btn) btn.className = type === active
                     ? "px-3 py-1.5 rounded-lg bg-white text-berkh-red shadow-sm transition-all font-bold"
                     : "px-3 py-1.5 rounded-lg hover:text-slate-900 transition-all font-semibold";
                 const box = document.getElementById('statBox' + (type === 'all' ? 'All' : type));
