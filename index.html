@@ -137,24 +137,24 @@
 
                 <!-- Quick Stats Box -->
                 <div class="bg-white/10 backdrop-blur-md rounded-2xl p-5 border border-white/20 grid grid-cols-3 gap-3 text-center">
-                    <div class="p-2 rounded-xl bg-black/10">
+                    <button type="button" onclick="setFilter('all', true)" id="statBoxAll" title="Нийт сурагчдыг харах" class="p-2 rounded-xl bg-black/10 hover:bg-white/20 transition-all cursor-pointer border-2 border-transparent">
                         <span class="block text-pink-200 text-xs font-medium">Нийт</span>
                         <span id="statTotal" class="text-2xl font-black text-berkh-gold">0</span>
-                    </div>
-                    <div class="p-2 rounded-xl bg-black/10">
+                    </button>
+                    <button type="button" onclick="setFilter('Эрэгтэй', true)" id="statBoxMale" title="Эрэгтэй сурагчдыг харах" class="p-2 rounded-xl bg-black/10 hover:bg-white/20 transition-all cursor-pointer border-2 border-transparent">
                         <span class="block text-pink-200 text-xs font-medium">Эрэгтэй</span>
                         <span id="statMale" class="text-2xl font-black text-sky-300">0</span>
-                    </div>
-                    <div class="p-2 rounded-xl bg-black/10">
+                    </button>
+                    <button type="button" onclick="setFilter('Эмэгтэй', true)" id="statBoxFemale" title="Эмэгтэй сурагчдыг харах" class="p-2 rounded-xl bg-black/10 hover:bg-white/20 transition-all cursor-pointer border-2 border-transparent">
                         <span class="block text-pink-200 text-xs font-medium">Эмэгтэй</span>
                         <span id="statFemale" class="text-2xl font-black text-pink-300">0</span>
-                    </div>
+                    </button>
                 </div>
             </div>
         </div>
 
         <!-- Controls Bar: Search, Gender Filter, View Mode -->
-        <div class="bg-white rounded-2xl shadow-sm border border-slate-200 p-4 mb-6 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div id="rosterControls" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-4 mb-6 flex flex-col md:flex-row justify-between items-center gap-4">
             
             <!-- Search Bar -->
             <div class="relative w-full md:w-96">
@@ -696,7 +696,7 @@
                 <span class="text-white font-semibold">Бэрх Олон Улсын Сургууль (Berkh International School)</span>
             </div>
             <div class="flex items-center gap-2">
-                <p>© 2026 10Б Ангийн веб сайт. Бүх эрх хуулиар хамгаалагдсан. <span class="opacity-50">v2026.10.01-d</span></p>
+                <p>© 2026 10Б Ангийн веб сайт. Бүх эрх хуулиар хамгаалагдсан. <span class="opacity-50">v2026.10.01-e</span></p>
                 <button onclick="openViewCodeModal()" class="opacity-25 hover:opacity-100 transition-opacity text-pink-200 hover:text-amber-300 p-1 ml-1" title="Профайл үзэх код солих (Багш)">
                     <i class="fa-solid fa-user-lock text-xs"></i>
                 </button>
@@ -795,6 +795,7 @@
 
         let students = [];
         let currentFilter = 'all';
+        window.addEventListener('load', () => setTimeout(() => setFilter('all'), 0));
         let currentViewMode = 'grid'; // 'grid' or 'table'
         let pendingDeleteId = null;
         let cropper = null; // Cropper.js instance
@@ -1003,19 +1004,22 @@
             return age;
         }
 
-        function setFilter(gender) {
+        function setFilter(gender, scroll = false) {
             currentFilter = gender;
-            
+            const map = { all: 'all', 'Эрэгтэй': 'Male', 'Эмэгтэй': 'Female' };
+            const active = map[gender];
             ['all', 'Male', 'Female'].forEach(type => {
                 const btn = document.getElementById(`filter${type}`);
-                if (type.toLowerCase() === gender.toLowerCase() || (type === 'all' && gender === 'all')) {
-                    btn.className = "px-3 py-1.5 rounded-lg bg-white text-berkh-red shadow-sm transition-all font-bold";
-                } else {
-                    btn.className = "px-3 py-1.5 rounded-lg hover:text-slate-900 transition-all font-semibold";
-                }
+                btn.className = type === active
+                    ? "px-3 py-1.5 rounded-lg bg-white text-berkh-red shadow-sm transition-all font-bold"
+                    : "px-3 py-1.5 rounded-lg hover:text-slate-900 transition-all font-semibold";
+                const box = document.getElementById('statBox' + (type === 'all' ? 'All' : type));
+                if (box) box.className = "p-2 rounded-xl transition-all cursor-pointer border-2 " +
+                    (type === active ? "bg-white/20 border-berkh-gold" : "bg-black/10 hover:bg-white/20 border-transparent");
             });
 
             renderRoster();
+            if (scroll) document.getElementById('rosterControls').scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
         function setViewMode(mode) {
